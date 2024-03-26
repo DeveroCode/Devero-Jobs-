@@ -4,7 +4,7 @@ import Logo from '/logo.png'
 </script>
 
 <template>
-    <header class="max-w-full flex justify-between items-center  py-5 px-20">
+    <header class="flex justify-between items-center py-5 px-20">
         <img :src="Logo" class="w-32" />
 
         <section class="space-x-10 text-gray-500">
