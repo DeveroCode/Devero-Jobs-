@@ -4,10 +4,10 @@ import { ChartBarSquareIcon, UsersIcon, FolderIcon, DevicePhoneMobileIcon, HomeI
 </script>
 
 <template>
-    <aside class="h-screen bg-white">
+    <aside class="h-auto bg-white shadow-lg">
         <nav class="px-10 py-20 space-y-4">
             <RouterLink :to="{ name: 'dashboard' }"
-                class="text-gray-400 text-lg hover:text-white bg-title rounded-md py-3 px-5 w-2/3 transition-colors duration-300 font-popins flex items-center gap-5">
+                class="text-gray-400 text-lg hover:text-white transition-colors duration-300 font-popins flex items-center gap-5">
                 <ChartBarSquareIcon class="w-7" />
                 Dashboard
             </RouterLink>
