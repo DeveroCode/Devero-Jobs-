@@ -8,8 +8,10 @@ export default {
     extend: {
       colors: {
         'header': "#222831",
-        'main': "#DFEFF9",
-        'title': "#31363F",
+        'main': "#f1f5f9", // Color background
+        'circle': "#eff2f7",
+        'icons': "#6979e6",
+        'title': "#24303f",
         'buttons': "#EEEEEE"
       },
       fontFamily: {
