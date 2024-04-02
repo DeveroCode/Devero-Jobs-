@@ -34,7 +34,7 @@ import Logo from '/logo.png'
                             Proyectos
                         </RouterLink>
 
-                        <RouterLink :to="{ name: 'home' }"
+                        <RouterLink :to="{ name: 'perfil' }"
                             class="flex px-3 hover:text-back transition-colors duration-300 gap-5 items-center font-popins text-white">
                             <UsersIcon class="w-7" />
                             Profile

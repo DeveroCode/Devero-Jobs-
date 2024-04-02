@@ -6,6 +6,8 @@ import HomeView from '@/views/HomeView.vue'
 import Login from '@/views/LoginView.vue'
 import Register from '@/views/RegisterView.vue'
 import DashboardView from '@/views/DashboardView.vue'
+import ProjectsView from '@/views/ProjectsView.vue'
+import Profile from '@/components/Profile.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -50,6 +52,16 @@ const router = createRouter({
           index: true,
           path: '',
           component: DashboardView
+        },
+        {
+          path: 'proyectos',
+          name: 'proyectos',
+          component: ProjectsView
+        },
+        {
+          path: 'perfil',
+          name: 'perfil',
+          component: Profile
         }
       ]
     }
