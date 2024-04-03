@@ -34,4 +34,17 @@ class RegisterRequest extends FormRequest
 
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name' => 'El nombre es requerido',
+            'apellidos' => 'Incluya un apellido ó ambos',
+            'email.required' => 'El email es obligatorio',
+            'email.email' => 'El email no es correcto',
+            'email.unique' => 'El email ya existe',
+            'password.required' => 'La contraseña es obligatoria',
+            'type_user' => 'El tipo de usario es necesario',
+        ];
+    }
 }

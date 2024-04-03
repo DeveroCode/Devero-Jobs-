@@ -6,5 +6,8 @@ export default {
     },
     login(data) {
         return clientApi.post('/api/login', data);
+    },
+    type_user() {
+        return clientApi.get('/api/type_user');
     }
 }
