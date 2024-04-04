@@ -29,7 +29,7 @@ import Logo from '/logo.png'
                     class="absolute inset-0 w-full h-full duration-300 delay-300 bg-gray-900 opacity-0 group-hover:opacity-100"></span>
                 <span class="relative transition-colors duration-300 delay-200 group-hover:text-white ease">Login</span>
             </RouterLink>
-            <RouterLink :to="{ name: 'home' }" class="rounded-sm border border-header px-2 py-3">
+            <RouterLink :to="{ name: 'register' }" class="rounded-sm border border-header px-2 py-3">
                 Registrarse
             </RouterLink>
         </section>

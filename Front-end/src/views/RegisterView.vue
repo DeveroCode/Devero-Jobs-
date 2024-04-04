@@ -2,7 +2,6 @@
 import { authMethods } from '@/stores/authMethods';
 import { reactive, onMounted, ref } from 'vue';
 import { FormKitMessages } from '@formkit/vue';
-import ErrorAlert from '@/components/ErrorAlert.vue';
 // Components and views
 
 const errores = ref([])
