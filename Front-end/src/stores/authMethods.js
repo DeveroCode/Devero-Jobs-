@@ -1,26 +1,30 @@
-import { defineStore } from "pinia";
+import { onMounted, watch } from "vue";
 import { useRouter } from "vue-router";
+import clientApi from "@/lib/axios";
 import { print, useNotificationStore } from "@/helpers/printErros";
 import APIServices from "@/services/APIServices";
-import useSWRV from "swrv";
+import useSWRV from "swrv"
 
-export const authMethods = defineStore('users', () => {
+export const authMethods = () => {
     const router = useRouter();
     const notification = useNotificationStore();
     const token = localStorage.getItem('AUTH_TOKEN');
-    // const errores = ref({});
 
-    // const { data: user, error, mutate } = useSWRV('/api/user', () =>
-    //     clientApi('/api/user', {
-    //         headers: {
-    //             Authorization: `Bearer ${token}`
-    //         }
-    //     })
-    //         .then(res => res.data) // Asegúrate de que la respuesta contenga la propiedad 'data'
-    //         .catch(error => {
-    //             throw Error(error.response.data.erros)
-    //         })
-    // );
+    const { data: user } = useSWRV('/api/user', () =>
+        clientApi('/api/user', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then(res => res.data) // Asegúrate de que la respuesta contenga la propiedad 'data'
+            .catch(error => {
+                throw Error(error.response.data.errors)
+            }),
+        {
+            revalidateOnMount: true
+
+        }
+    );
 
     async function userRegister(datas, errors) {
         try {
@@ -32,6 +36,17 @@ export const authMethods = defineStore('users', () => {
             router.push({ name: 'login' });
         } catch (error) {
             print(errors, error);
+            console.error("Error en userLogin:", error);
+        }
+    }
+
+    async function userLogin(datas, errores) {
+        try {
+            const { data } = await APIServices.login(datas);
+            localStorage.setItem('AUTH_TOKEN', data.token);
+        } catch (error) {
+            print(errores, error);
+            console.error("Error en userLogin:", error);
         }
     }
 
@@ -44,8 +59,11 @@ export const authMethods = defineStore('users', () => {
         }
     }
 
+
     return {
         userRegister,
-        getTypeUser
+        userLogin,
+        getTypeUser,
+        user
     }
-});
+}

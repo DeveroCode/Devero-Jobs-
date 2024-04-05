@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -31,6 +33,22 @@ class AuthController extends Controller
             'user' => $user,
         ];
     }
-    public function login(Request $request)
-    {}
+    public function login(LoginRequest $request)
+    {
+        $data = $request->validated();
+
+        // Check the password
+        if (!Auth::attempt($data)) {
+            return response([
+                'errors' => ['El email o password no son correctos'],
+            ], 422);
+        }
+
+        // Authenticate
+        $user = User::where('email', $data['email'])->first();
+        return [
+            'token' => $user->createToken('token')->plainTextToken,
+            'user' => $user,
+        ];
+    }
 }

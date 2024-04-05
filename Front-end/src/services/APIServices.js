@@ -5,6 +5,7 @@ export default {
         return clientApi.post('/api/register', data);
     },
     login(data) {
+        console.log(data);
         return clientApi.post('/api/login', data);
     },
     type_user() {
