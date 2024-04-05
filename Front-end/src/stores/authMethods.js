@@ -1,11 +1,11 @@
-import { onMounted, watch } from "vue";
 import { useRouter } from "vue-router";
 import clientApi from "@/lib/axios";
 import { print, useNotificationStore } from "@/helpers/printErros";
 import APIServices from "@/services/APIServices";
 import useSWRV from "swrv"
+import { defineStore } from "pinia";
 
-export const authMethods = () => {
+export const authMethods = defineStore('auth', () => {
     const router = useRouter();
     const notification = useNotificationStore();
     const token = localStorage.getItem('AUTH_TOKEN');
@@ -66,4 +66,4 @@ export const authMethods = () => {
         getTypeUser,
         user
     }
-}
+});
