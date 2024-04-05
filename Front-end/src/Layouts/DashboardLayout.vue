@@ -3,7 +3,7 @@ import Aside from '@/components/Aside.vue'
 import Search from '@/components/SearchProjects.vue';
 import { authMethods } from '@/stores/authMethods';
 
-const { user } = authMethods({ middleware: 'auth' });
+const { user } = authMethods();
 </script>
 
 <template>

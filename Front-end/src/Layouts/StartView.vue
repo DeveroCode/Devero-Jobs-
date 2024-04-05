@@ -9,13 +9,12 @@ const router = useRoute();
 </script>
 
 <template>
-    <div class="bg-white"
-        :class="{ 'h-[770px] md:h-screen': $route.name === 'login', 'h-[900px] md:h-[1200px] xl:h-screen': $route.name === 'register' }">
-        <RouterLink :to="{ name: 'home' }" class="pt-5">
-            <img :src="Logo" class="w-64 md:w-32 mx-auto md:mx-16" />
+    <div class="bg-white "
+        :class="{ 'h-[670px] md:h-screen': $route.name === 'login', 'h-[900px] md:h-[810px] 2xl:h-[970px]': $route.name === 'register' }">
+        <RouterLink :to="{ name: 'home' }">
+            <img :src="Logo" class="w-64 md:w-36 mx-auto md:mx-16 md:py-2" />
         </RouterLink>
-        <div
-            class="flex flex-col h-[570px] items-center justify-center md:flex-row md:justify-center md:items-center md:px-10 md:py-5 md:h-auto">
+        <div class="flex flex-col md:flex-row md:justify-center md:items-center md:px-10 md:py-5 mx-auto ">
             <RouterView class="px-10 md:w-1/2" />
             <div class="w-1/2 hidden md:block" v-if="router.name === 'login'">
                 <p class="text-center font-popins text-title">Nos alegramos de verte de regreso</p>

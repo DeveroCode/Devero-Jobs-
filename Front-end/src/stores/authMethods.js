@@ -44,6 +44,7 @@ export const authMethods = defineStore('auth', () => {
         try {
             const { data } = await APIServices.login(datas);
             localStorage.setItem('AUTH_TOKEN', data.token);
+            router.push({ name: 'dashboard' });
         } catch (error) {
             print(errores, error);
             console.error("Error en userLogin:", error);

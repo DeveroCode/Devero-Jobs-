@@ -17,6 +17,11 @@ export default {
       },
       fontFamily: {
         'popins': 'Poppins, sans-serif'
+      },
+      screens: {
+        'lg': '1600px',
+
+        '2xl': '1920px',
       }
     }
   },
