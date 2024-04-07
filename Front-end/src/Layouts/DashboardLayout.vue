@@ -1,9 +1,16 @@
 <script setup>
+import { onMounted, ref } from 'vue';
 import Aside from '@/components/Aside.vue'
 import Search from '@/components/SearchProjects.vue';
 import { authMethods } from '@/stores/authMethods';
 
-const { user } = authMethods();
+const { dataUser } = authMethods();
+const users = ref([]);
+
+
+onMounted(async () => {
+    await dataUser(users)
+})
 </script>
 
 <template>
@@ -12,7 +19,7 @@ const { user } = authMethods();
             <Aside class="col-span-2" />
             <div class="col-span-10">
                 <Search />
-                <RouterView />
+                <RouterView :users="users" />
             </div>
         </div>
     </div>

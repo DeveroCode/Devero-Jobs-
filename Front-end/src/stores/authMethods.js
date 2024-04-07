@@ -1,30 +1,13 @@
 import { useRouter } from "vue-router";
-import clientApi from "@/lib/axios";
+import { defineStore } from "pinia";
 import { print, useNotificationStore } from "@/helpers/printErros";
 import APIServices from "@/services/APIServices";
-import useSWRV from "swrv"
-import { defineStore } from "pinia";
 
 export const authMethods = defineStore('auth', () => {
     const router = useRouter();
     const notification = useNotificationStore();
-    const token = localStorage.getItem('AUTH_TOKEN');
 
-    const { data: user } = useSWRV('/api/user', () =>
-        clientApi('/api/user', {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-            .then(res => res.data) // Asegúrate de que la respuesta contenga la propiedad 'data'
-            .catch(error => {
-                throw Error(error.response.data.errors)
-            }),
-        {
-            revalidateOnMount: true
 
-        }
-    );
 
     async function userRegister(datas, errors) {
         try {
@@ -36,7 +19,6 @@ export const authMethods = defineStore('auth', () => {
             router.push({ name: 'login' });
         } catch (error) {
             print(errors, error);
-            console.error("Error en userLogin:", error);
         }
     }
 
@@ -51,12 +33,36 @@ export const authMethods = defineStore('auth', () => {
         }
     }
 
+    async function updateUser(datas, errores) {
+        try {
+            const response = await APIServices.update(datas);
+            notification.mostrar = true;
+            notification.texto = 'DeveroJobs';
+            notification.error = false;
+            notification.success = 'Usuario actualizado correctamente';
+            router.push({ name: 'dashboard' });
+        } catch (error) {
+            print(errores, error);
+
+            // console.log(error);
+        }
+    }
+
     async function getTypeUser(users) {
         try {
             const { data } = (await APIServices.type_user());
             users.value = data.data;
         } catch (error) {
-            console.log(error);
+            // console.log(error);
+        }
+    }
+
+    async function dataUser(user) {
+        try {
+            const { data } = await APIServices.getUser();
+            user.value = data
+        } catch (error) {
+            // console.log('Error al obtener los datos: ', error);
         }
     }
 
@@ -64,7 +70,8 @@ export const authMethods = defineStore('auth', () => {
     return {
         userRegister,
         userLogin,
+        updateUser,
         getTypeUser,
-        user
+        dataUser
     }
 });

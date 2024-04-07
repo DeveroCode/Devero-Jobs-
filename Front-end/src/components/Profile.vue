@@ -1,4 +1,26 @@
 <script setup>
+import { defineProps, ref } from 'vue';
+import { authMethods } from '@/stores/authMethods';
+
+defineProps({
+    users: Object // 
+});
+
+const errores = ref([]);
+const { updateUser } = authMethods();
+
+const handleSubmit = users => {
+    const data = {
+        name: users.name,
+        apellidos: users.apellidos,
+        email: users.email,
+        username: users.username,
+        password: users.password,
+        password_confirmation: users.password_confirmation,
+    }
+
+    updateUser(data, errores)
+}
 </script>
 
 <template>
@@ -6,7 +28,7 @@
         <h1 class="text-title font-popins font-bold text-2xl">Ajustes</h1>
 
         <section class="flex justify-between py-16">
-            <div class="bg-white rounded-sm shadow-md border border-gray-300">
+            <div class="bg-white rounded-sm shadow-md border border-gray-300 md:w-[65%] 2xl:w-[50%]">
                 <div class="border-b border-stroke py-4 px-7">
                     <p class="text-title font-popins text-md capitalize">
                         información personal
@@ -14,36 +36,39 @@
                 </div>
 
                 <div class="py-10 px-10">
-                    <FormKit type="form" :actions="false">
-                        <div class="flex flex-col mb-5 md:flex-row md:gap-10">
-                            <FormKit type="text" name="nombre" label="Nombre(s)" placeholder="Ej: Carlos Alberto"
-                                validation="required" :validation-messages="{ required: 'El nombre es necesario' }"
-                                validation-visibility="summit" />
-                            <FormKit type="text" name="apellido" label="Apellido(s)" placeholder="Ej: Martinez"
-                                validation="required"
-                                :validation-messages="{ required: 'El apellido debe contener minimo uno' }"
-                                validation-visibility="summit" />
-                        </div>
+                    <FormKit type="form" :actions="false" @submit="handleSubmit">
+                        <FormKit type="text" name="name" label="Nombre(s)" placeholder="Ej: Carlos ALberto"
+                            v-model="users.name" />
+                        <FormKit type="text" name="apellidos" label="Apellido(s)" placeholder="Ej: Martinez"
+                            v-model="users.apellidos" />
 
                         <FormKit type="email" name="email" label="Correo" placeholder="Ej: Devero@code.com"
                             validation="required|email"
                             :validation-messages="{ required: 'El email no debe ser vacío', email: 'El email no es correcto' }"
-                            validation-visibility="summit" />
+                            validation-visibility="summit" v-model="users.email" />
 
 
                         <FormKit type="text" name="username" label="Username" placeholder="Ej: DeveroCode"
-                            validation="required|text"
-                            :validation-messages="{ required: 'El username no debe ser vacío' }"
-                            validation-visibility="summit" />
+                            v-model="users.username" />
+
+                        <!-- Confirmed the password for update profile -->
+                        <div class="flex justify-between flex-col md:flex-row">
+                            <FormKit type="password" name="password" label="Password" placeholder="password"
+                                v-model="users.password" />
+                            <FormKit type="password" name="password_confirmation" label="Repetir Password"
+                                placeholder="confirma tu password" v-model="users.password_confirmation" />
+                        </div>
+
+                        <div class="flex justify-end gap-10">
+                            <button
+                                class="py-2 mt-6 px-6 rounded-md border border-title text-title font-popins uppercase">
+                                Cancelar
+                            </button>
+                            <button class="py-2 mt-6 px-6 bg-header rounded-md text-white font-popins uppercase">
+                                Guardar
+                            </button>
+                        </div>
                     </FormKit>
-                    <div class="flex justify-end gap-10">
-                        <button class="py-2 mt-6 px-6 rounded-md border border-title text-title font-popins uppercase">
-                            Cancelar
-                        </button>
-                        <button class="py-2 mt-6 px-6 bg-header rounded-md text-white font-popins uppercase">
-                            Guardar
-                        </button>
-                    </div>
                 </div>
             </div>
             <div class="w-1/3">
