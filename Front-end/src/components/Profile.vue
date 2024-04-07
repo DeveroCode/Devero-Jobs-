@@ -24,10 +24,10 @@ const handleSubmit = users => {
 </script>
 
 <template>
-    <main class="py-20 px-10">
+    <main class="py-10 2xl:py-32 px-10">
         <h1 class="text-title font-popins font-bold text-2xl">Ajustes</h1>
 
-        <section class="flex justify-between py-16">
+        <section class="flex justify-between py-10 2xl:py-16">
             <div class="bg-white rounded-sm shadow-md border border-gray-300 md:w-[65%] 2xl:w-[50%]">
                 <div class="border-b border-stroke py-4 px-7">
                     <p class="text-title font-popins text-md capitalize">
@@ -35,21 +35,26 @@ const handleSubmit = users => {
                     </p>
                 </div>
 
-                <div class="py-10 px-10">
+                <div class="py-10 px-10 mx-auto">
                     <FormKit type="form" :actions="false" @submit="handleSubmit">
-                        <FormKit type="text" name="name" label="Nombre(s)" placeholder="Ej: Carlos ALberto"
-                            v-model="users.name" />
-                        <FormKit type="text" name="apellidos" label="Apellido(s)" placeholder="Ej: Martinez"
-                            v-model="users.apellidos" />
+                        <fieldset class="flex flex-col md:flex-row md:justify-between">
+                            <FormKit type="text" name="name" label="Nombre(s)" placeholder="Ej: Carlos ALberto"
+                                v-model="users.name" />
+                            <FormKit type="text" name="apellidos" label="Apellido(s)" placeholder="Ej: Martinez"
+                                v-model="users.apellidos" />
+                        </fieldset>
 
-                        <FormKit type="email" name="email" label="Correo" placeholder="Ej: Devero@code.com"
-                            validation="required|email"
-                            :validation-messages="{ required: 'El email no debe ser vacío', email: 'El email no es correcto' }"
-                            validation-visibility="summit" v-model="users.email" />
+                        <fieldset class="flex flex-col md:flex-row md:justify-between">
+                            <FormKit type="email" name="email" label="Correo" placeholder="Ej: Devero@code.com"
+                                validation="required|email"
+                                :validation-messages="{ required: 'El email no debe ser vacío', email: 'El email no es correcto' }"
+                                validation-visibility="summit" v-model="users.email" />
 
 
-                        <FormKit type="text" name="username" label="Username" placeholder="Ej: DeveroCode"
-                            v-model="users.username" />
+                            <FormKit type="text" name="username" label="Username" placeholder="Ej: DeveroCode"
+                                v-model="users.username" />
+                        </fieldset>
+
 
                         <!-- Confirmed the password for update profile -->
                         <div class="flex justify-between flex-col md:flex-row">
@@ -59,7 +64,7 @@ const handleSubmit = users => {
                                 placeholder="confirma tu password" v-model="users.password_confirmation" />
                         </div>
 
-                        <div class="flex justify-end gap-10">
+                        <div class="flex justify-end gap-5">
                             <button
                                 class="py-2 mt-6 px-6 rounded-md border border-title text-title font-popins uppercase">
                                 Cancelar
