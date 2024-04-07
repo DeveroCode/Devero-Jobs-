@@ -16,6 +16,7 @@
     "swr": "^2.2.5",
     "swrv": "^1.0.4",
     "vue": "^3.4.21",
+    "vue-query": "^1.26.0",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
