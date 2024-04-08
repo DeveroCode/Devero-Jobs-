@@ -10,7 +10,7 @@ const users = ref([]);
 
 onMounted(async () => {
     await dataUser(users)
-})
+});
 </script>
 
 <template>
