@@ -15,6 +15,13 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
+        $user = $request->user();
+        $user->currentAccessToken()->delete();
+        // $user->tokens()->delete();
+
+        return [
+            'user' => null,
+        ];
     }
     public function register(RegisterRequest $request)
     {
