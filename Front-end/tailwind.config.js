@@ -17,6 +17,9 @@ export default {
       },
       fontFamily: {
         'popins': 'Poppins, sans-serif'
+      },
+      screens: {
+        '3xl': '1800px'
       }
     }
   },
