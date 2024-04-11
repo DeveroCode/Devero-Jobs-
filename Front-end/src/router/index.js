@@ -8,6 +8,7 @@ import Register from '@/views/RegisterView.vue'
 import DashboardView from '@/views/DashboardView.vue'
 import ProjectsView from '@/views/ProjectsView.vue'
 import Profile from '@/components/Profile.vue'
+import JobViewVue from '@/views/JobView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -63,6 +64,11 @@ const router = createRouter({
           path: 'perfil',
           name: 'perfil',
           component: Profile
+        },
+        {
+          path: 'publicar',
+          name: 'publicar',
+          component: JobViewVue
         }
       ]
     }
