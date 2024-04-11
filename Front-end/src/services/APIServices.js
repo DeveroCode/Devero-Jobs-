@@ -1,4 +1,3 @@
-import useSWRV from 'swrv'
 import clientApi from "@/lib/axios";
 const token = localStorage.getItem('AUTH_TOKEN');
 
@@ -19,7 +18,6 @@ export default {
     type_user() {
         return clientApi.get('/api/type_user');
     },
-
     getUser() {
         return clientApi.get('/api/user', {
             headers: {
@@ -29,5 +27,10 @@ export default {
             .catch(error => {
                 console.log(error);
             });
+    },
+
+    // Start Job Posting
+    getTime() {
+        return clientApi.get('/api/time');
     }
 }

@@ -1,8 +1,41 @@
 <script setup>
+import { ref, onMounted, reactive } from 'vue'
+import { jobPosting } from '@/stores/JobPosting.js'
+
+const { timeJob } = jobPosting();
+const time = reactive({});
+const job = reactive({
+    'name': '',
+    'description': '',
+    'time': '',
+    'payment': '',
+    'image': ''
+});
+
+const handleSubmit = () => {
+    const data = {
+        'name': job.name,
+        'description': job.description,
+        'time': job.time,
+        'payment': job.payment,
+        'image': job.image
+    }
+
+    console.log(data);
+}
+
+const typeTime = () => {
+    timeJob(time)
+}
+
+onMounted(() => {
+    typeTime();
+});
+
 </script>
 
 <template>
-    <FormKit type="form" :actions="false">
+    <FormKit type="form" :actions="false" @submit="handleSubmit">
         <!-- Campo 1 -->
         <fieldset
             class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-gray-200 pb-5">
@@ -12,7 +45,7 @@
                     de ser descriptivo</span>
             </div>
             <div class="w-full md:w-2/3">
-                <FormKit type="text" name="name" placeholder="Ej: Desarrollo Web" />
+                <FormKit type="text" name="name" placeholder="Ej: Desarrollo Web" v-model="job.name" />
             </div>
         </fieldset>
 
@@ -25,7 +58,8 @@
                     realizar.</span>
             </div>
             <div class="w-full md:w-2/3">
-                <FormKit type="textarea" name="edescription" placeholder="Ej: Desarrollo Web" />
+                <FormKit type="textarea" name="edescription" placeholder="Ej: Desarrollo Web"
+                    v-model="job.description" />
             </div>
         </fieldset>
 
@@ -38,13 +72,11 @@
                     realización del proyecto.</span>
             </div>
             <div class="w-full md:w-2/3">
-                <FormKit type="select" name="time" class="col-span-1 md:col-span-2">
+                <FormKit type="select" name="time" class="col-span-1 md:col-span-2" v-model="job.time">
                     <option disabled value="" class="capitalize">Selecciona</option>
-                    <option value="" class="capitalize">Urgencia</option>
-                    <option value="" class="capitalize">78 hrs</option>
-                    <option value="" class="capitalize">1 Mes</option>
-                    <option value="" class="capitalize">2 Meses</option>
-                    <option value="" class="capitalize">6 Meses</option>
+                    <option v-for="job in time.value" :value="job.id" :key="job.id">
+                        {{ job.name }}
+                    </option>
                 </FormKit>
             </div>
         </fieldset>
@@ -58,7 +90,8 @@
                     este proyecto. La cantidad se tomará en dólares.</span>
             </div>
             <div class="w-full md:w-2/3">
-                <FormKit type="number" name="name" placeholder="Ej: Desarrollo Web" min="200" max="10000" />
+                <FormKit type="number" name="name" placeholder="Ej: Desarrollo Web" min="200" max="10000"
+                    v-model="job.payment" />
             </div>
         </fieldset>
 
@@ -71,8 +104,12 @@
                     necesitas, ayudaría al postulante</span>
             </div>
             <div class="w-full md:w-2/3">
-                <FormKit type="file" name="image" accept=".pgn, .jpg, .png, .jpeg, .webp" />
+                <FormKit type="file" name="image" accept=".pgn, .jpg, .png, .jpeg, .webp" v-model="job.image" />
             </div>
         </fieldset>
+
+        <input type="submit"
+            class="py-2 mt-10 px-6 cursor-pointer bg-header rounded-md text-white font-popins uppercase col-span-2 w-full md:w-[150px]"
+            value="Publicar">
     </FormKit>
 </template>

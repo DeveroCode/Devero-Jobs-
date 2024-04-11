@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TimeController;
 use App\Http\Controllers\TypeUserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 });
 
 // Resources
+Route::get('/time', [TimeController::class, 'index']);
 Route::apiResource('/type_user', TypeUserController::class);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
