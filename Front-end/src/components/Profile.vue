@@ -20,15 +20,15 @@ const handleSubmit = users => {
     }
 
     updateUser(data, errores)
-}
+};
 </script>
 
 <template>
     <main class="py-10 2xl:py-32 px-10">
         <h1 class="text-title font-popins font-bold text-2xl">Ajustes</h1>
 
-        <section class="flex justify-between py-10 2xl:py-16">
-            <div class="bg-white rounded-sm shadow-md border border-gray-300 md:w-[65%] 2xl:w-[50%]">
+        <section class="flex flex-col lg:flex-row md:justify-between py-10 2xl:py-16">
+            <div class="bg-white rounded-sm shadow-md border border-gray-300 md:full 2xl:w-[60%]">
                 <div class="border-b border-stroke py-4 px-7">
                     <p class="text-title font-popins text-md capitalize">
                         información personal
@@ -76,7 +76,7 @@ const handleSubmit = users => {
                     </FormKit>
                 </div>
             </div>
-            <div class="w-1/3">
+            <div class="w-full mt-10 lg:mt-0 lg:w-1/3">
                 <div class="bg-white rounded-sm shadow-md border border-gray-300">
                     <div class="border-b border-stroke py-4 px-7">
                         <p class="text-title font-popins text-md capitalize">

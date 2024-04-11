@@ -1,16 +1,30 @@
 <script setup>
+import { defineProps } from 'vue';
 import { RouterLink } from 'vue-router';
-import { ChartBarSquareIcon, UsersIcon, FolderIcon, DevicePhoneMobileIcon, HomeIcon, ArrowRightEndOnRectangleIcon } from '@heroicons/vue/24/outline'
+import { ChartBarSquareIcon, UsersIcon, FolderIcon, DevicePhoneMobileIcon, HomeIcon, ArrowRightEndOnRectangleIcon, BriefcaseIcon } from '@heroicons/vue/24/outline'
+import { authMethods } from '@/stores/authMethods';
 import Logo from '/logo.png'
+
+const { logout } = authMethods();
+
+defineProps({
+    toggleMenu: Function
+});
+
 </script>
 
 <template>
-    <aside class="w-72.5 flex-col bg-title h-screen">
+    <aside class="w-72.5 flex-col bg-title fixed top-0 left-0 w-[250px] h-screen">
         <!-- SIDEBAR HEADER -->
         <div class="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
-            <RouterLink :to="{ name: 'home' }">
+            <RouterLink class="hidden lg:block" :to="{ name: 'home' }">
                 <img :src="Logo" alt="Logo" class="py-10" />
             </RouterLink>
+
+
+            <button class="block lg:hidden" @click="toggleMenu">
+                <img :src="Logo" alt="Logo" class="py-10" />
+            </button>
 
             <!-- Here will go the responsive button  -->
         </div>
@@ -34,13 +48,19 @@ import Logo from '/logo.png'
                             Proyectos
                         </RouterLink>
 
+                        <RouterLink :to="{ name: 'publicar' }"
+                            class="flex px-3 hover:text-back transition-colors duration-300 gap-5 items-center font-popins text-white">
+                            <BriefcaseIcon class="w-7" />
+                            Publicar
+                        </RouterLink>
+
                         <RouterLink :to="{ name: 'perfil' }"
                             class="flex px-3 hover:text-back transition-colors duration-300 gap-5 items-center font-popins text-white">
                             <UsersIcon class="w-7" />
                             Profile
                         </RouterLink>
 
-                        <RouterLink :to="{ name: 'home' }"
+                        <RouterLink :to="{ name: 'home' }" v-on="{ click: logout }"
                             class="flex px-3 hover:text-back transition-colors duration-300 gap-5 items-center font-popins text-white">
                             <DevicePhoneMobileIcon class="w-7" />
                             Contactos
@@ -59,11 +79,11 @@ import Logo from '/logo.png'
                             Incio
                         </RouterLink>
 
-                        <RouterLink :to="{ name: 'home' }"
+                        <button @click="logout"
                             class="flex px-3 hover:text-back transition-colors duration-300 gap-5 items-center font-popins text-white capitalize">
                             <ArrowRightEndOnRectangleIcon class="w-7" />
                             cerrar sesión
-                        </RouterLink>
+                        </button>
                     </ul>
                 </div>
             </nav>
