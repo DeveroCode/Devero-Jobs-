@@ -35,12 +35,12 @@ const handleSubmit = () => {
                 <FormKit type="password" name="password" label="Contraseña" placeholder="password"
                     v-model="user.password" />
 
-                <div class="flex items-center mb-5 justify-between md:w-9/12 lg:w-10/12">
-                    <RouterLink :to="{ name: 'register' }" class="text-sm 2xl:text-lg font-popins text-title">Crear
+                <div class="flex items-center mb-5 justify-between md:w-9/12 lg:w-10/12 3xl:w-[320px]">
+                    <RouterLink :to="{ name: 'register' }" class="text-sm 3xl:text-md font-popins text-title">Crear
                         cuenta
                     </RouterLink>
 
-                    <RouterLink :to="{ name: 'home' }" class="text-sm font-popins text-title 2xl:text-lg">
+                    <RouterLink :to="{ name: 'home' }" class="text-sm font-popins text-title 3xl:text-md">
                         Olvidaste la
                         contraseña?
                     </RouterLink>

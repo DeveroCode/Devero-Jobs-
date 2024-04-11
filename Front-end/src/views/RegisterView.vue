@@ -61,7 +61,7 @@ const handleSubmit = () => {
                 placeholder="password" />
 
             <RouterLink :to="{ name: 'login' }"
-                class="text-sm mb-2 block md:text-end md:mt-2 xl:w-10/12 font-popins text-title col-span-2 2xl:text-lg">
+                class="text-sm mb-2 block md:text-end md:mt-2 md:w-10/12 3xl:w-[320px] 3xl:mb-4 font-popins text-title col-span-2 2xl:text-lg">
                 Ya tengo una cuenta
             </RouterLink>
 
