@@ -1,18 +1,23 @@
 import { useRouter } from "vue-router";
 import { defineStore } from "pinia";
 import { print, useNotificationStore } from "@/helpers/printErros";
-import clientApi from "@/lib/axios";
 import APIServices from "@/services/APIServices";
 
 export const jobPosting = defineStore('job', () => {
 
+    const notification = useNotificationStore();
     const router = useRouter();
 
-    async function registerProject(datas, errores) {
+    async function registerProject(data, errores) {
         try {
-            const { data } = await APIServices.registerProject(datas);
+            const response = await APIServices.registerProject(data);
+            notification.mostrar = true;
+            notification.texto = 'DeveroJobs';
+            notification.error = false;
+            notification.success = 'Proyecto publicado correctamente';
+            router.push({ name: 'proyectos' });
         } catch (error) {
-            console.log(error);
+            print(errores, error);
         }
     }
 
@@ -21,7 +26,7 @@ export const jobPosting = defineStore('job', () => {
             const { data } = await APIServices.getTime();
             time.value = data.data
         } catch (error) {
-            console.log(error);
+            console.log(error.response.data.message);
         }
     }
 

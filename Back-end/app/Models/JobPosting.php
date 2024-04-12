@@ -9,13 +9,13 @@ class JobPosting extends Model
 {
     use HasFactory;
 
-    protected $rules = [
-        'title' => 'required',
-        'time_id' => 'required',
-        'description' => 'required',
-        'honorarios' => 'integer',
-        'imagen' => 'nullable',
-        'user_id' => 'required',
+    protected $fillable = [
+        'name',
+        'time_id',
+        'description',
+        'honorarios',
+        // 'image' => ,
+        'user_id',
     ];
 
     public function time()

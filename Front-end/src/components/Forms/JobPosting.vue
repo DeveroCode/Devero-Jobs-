@@ -1,6 +1,6 @@
 <script setup>
-import { ref, onMounted, reactive } from 'vue'
-import { jobPosting } from '@/stores/JobPosting.js'
+import { ref, onMounted, reactive } from 'vue';
+import { jobPosting } from '@/stores/JobPosting.js';
 
 const { timeJob, registerProject } = jobPosting();
 const errores = ref({});
@@ -8,20 +8,20 @@ const time = reactive({});
 
 
 const job = reactive({
-    'title': '',
-    'description': '',
+    'name': '',
     'time_id': '',
+    'description': '',
     'honorarios': '',
-    'image': ''
+    // 'image': ''
 });
 
 const handleSubmit = () => {
     const data = {
-        'title': job.title,
-        'description': job.description,
+        'name': job.name,
         'time_id': job.time_id,
+        'description': job.description,
         'honorarios': job.honorarios,
-        'image': job.image
+        // 'image': job.image
     }
 
     registerProject(data, errores);
@@ -48,7 +48,7 @@ onMounted(() => {
                     de ser descriptivo</span>
             </div>
             <div class="w-full md:w-2/3">
-                <FormKit type="text" name="name" placeholder="Ej: Desarrollo Web" v-model="job.title" />
+                <FormKit type="text" name="name" placeholder="Ej: Desarrollo Web" v-model="job.name" />
             </div>
         </fieldset>
 

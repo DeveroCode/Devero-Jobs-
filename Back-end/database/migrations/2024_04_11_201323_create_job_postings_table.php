@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('job_postings', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('name');
             $table->foreignId('time_id')->constrained('times');
             $table->string('description');
             $table->integer('honorarios');
-            $table->string('image')->nullable('true');
+            $table->string('image')->nullable('false');
             $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });

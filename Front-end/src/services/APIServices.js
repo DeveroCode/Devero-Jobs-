@@ -35,6 +35,7 @@ export default {
     },
 
     registerProject(data) {
+        console.log(data);
         return clientApi.post('/api/project-register', data, {
             headers: {
                 Authorization: `Bearer ${token}`
