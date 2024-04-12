@@ -2,26 +2,29 @@
 import { ref, onMounted, reactive } from 'vue'
 import { jobPosting } from '@/stores/JobPosting.js'
 
-const { timeJob } = jobPosting();
+const { timeJob, registerProject } = jobPosting();
+const errores = ref({});
 const time = reactive({});
+
+
 const job = reactive({
-    'name': '',
+    'title': '',
     'description': '',
-    'time': '',
-    'payment': '',
+    'time_id': '',
+    'honorarios': '',
     'image': ''
 });
 
 const handleSubmit = () => {
     const data = {
-        'name': job.name,
+        'title': job.title,
         'description': job.description,
-        'time': job.time,
-        'payment': job.payment,
+        'time_id': job.time_id,
+        'honorarios': job.honorarios,
         'image': job.image
     }
 
-    console.log(data);
+    registerProject(data, errores);
 }
 
 const typeTime = () => {
@@ -45,7 +48,7 @@ onMounted(() => {
                     de ser descriptivo</span>
             </div>
             <div class="w-full md:w-2/3">
-                <FormKit type="text" name="name" placeholder="Ej: Desarrollo Web" v-model="job.name" />
+                <FormKit type="text" name="name" placeholder="Ej: Desarrollo Web" v-model="job.title" />
             </div>
         </fieldset>
 
@@ -72,7 +75,7 @@ onMounted(() => {
                     realización del proyecto.</span>
             </div>
             <div class="w-full md:w-2/3">
-                <FormKit type="select" name="time" class="col-span-1 md:col-span-2" v-model="job.time">
+                <FormKit type="select" name="time" class="col-span-1 md:col-span-2" v-model="job.time_id">
                     <option disabled value="" class="capitalize">Selecciona</option>
                     <option v-for="job in time.value" :value="job.id" :key="job.id">
                         {{ job.name }}
@@ -91,7 +94,7 @@ onMounted(() => {
             </div>
             <div class="w-full md:w-2/3">
                 <FormKit type="number" name="name" placeholder="Ej: Desarrollo Web" min="200" max="10000"
-                    v-model="job.payment" />
+                    v-model="job.honorarios" />
             </div>
         </fieldset>
 

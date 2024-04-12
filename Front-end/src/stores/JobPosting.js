@@ -8,6 +8,13 @@ export const jobPosting = defineStore('job', () => {
 
     const router = useRouter();
 
+    async function registerProject(datas, errores) {
+        try {
+            const { data } = await APIServices.registerProject(datas);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     async function timeJob(time) {
         try {
@@ -20,5 +27,6 @@ export const jobPosting = defineStore('job', () => {
 
     return {
         timeJob,
+        registerProject,
     }
 });

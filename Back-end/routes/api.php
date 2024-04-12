@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\JobPostingController;
 use App\Http\Controllers\TimeController;
 use App\Http\Controllers\TypeUserController;
 use Illuminate\Http\Request;
@@ -18,6 +19,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::put('/update', [AuthController::class, 'update']);
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+
+    // Start routes for Projects
+    Route::post('/project-register', [JobPostingController::class, 'register']);
 });
 
 // Resources

@@ -32,5 +32,13 @@ export default {
     // Start Job Posting
     getTime() {
         return clientApi.get('/api/time');
+    },
+
+    registerProject(data) {
+        return clientApi.post('/api/project-register', data, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
     }
 }
