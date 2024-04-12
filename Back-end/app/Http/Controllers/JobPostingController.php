@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterProjectRequest;
+use App\Http\Resources\ProjectsCollection;
 use App\Models\JobPosting;
 
 class JobPostingController extends Controller
@@ -25,5 +26,10 @@ class JobPostingController extends Controller
         return [
             'project' => $project,
         ];
+    }
+
+    public function show()
+    {
+        return new ProjectsCollection(JobPosting::all());
     }
 }

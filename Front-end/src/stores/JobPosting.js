@@ -30,8 +30,18 @@ export const jobPosting = defineStore('job', () => {
         }
     }
 
+    async function projects(project) {
+        try {
+            const { data } = await APIServices.getProjects();
+            project.value = data.data
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return {
         timeJob,
         registerProject,
+        projects
     }
 });

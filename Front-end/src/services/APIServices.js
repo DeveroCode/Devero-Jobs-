@@ -41,5 +41,13 @@ export default {
                 Authorization: `Bearer ${token}`
             }
         });
+    },
+
+    getProjects() {
+        return clientApi.get('/api/projects', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
     }
 }

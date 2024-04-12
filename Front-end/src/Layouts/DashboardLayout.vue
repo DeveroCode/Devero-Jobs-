@@ -18,9 +18,6 @@ const open = ref(false);
 const toggleMenu = () => {
     open.value = !open.value
 }
-
-
-console.log(open.value);
 </script>
 
 <template>
