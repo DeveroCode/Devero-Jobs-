@@ -9,7 +9,7 @@ export default {
     extend: {
       colors: {
         'header': "#222831",
-        'main': "#f1f5f9", // Color background
+        'main': "#F3F3F3", // Color background
         'circle': "#eff2f7",
         'icons': "#6979e6",
         'title': "#24303f",

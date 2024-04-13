@@ -14,7 +14,7 @@ class JobPosting extends Model
         'time_id',
         'description',
         'honorarios',
-        // 'image' => ,
+        'image',
         'user_id',
     ];
 

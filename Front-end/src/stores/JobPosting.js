@@ -17,7 +17,8 @@ export const jobPosting = defineStore('job', () => {
             notification.success = 'Proyecto publicado correctamente';
             router.push({ name: 'proyectos' });
         } catch (error) {
-            print(errores, error);
+            // print(errores, error);
+            console.log(error);
         }
     }
 

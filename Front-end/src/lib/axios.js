@@ -6,6 +6,7 @@ const clientApi = axios.create(
         headers: {
             'Accept': 'application/json',
             'X-Requested-With': 'XMLHttpRequest',
+            'Content-Type': 'multipart/form-data'
         },
         withCredentials: true,
     }

@@ -8,18 +8,21 @@ use App\Models\JobPosting;
 
 class JobPostingController extends Controller
 {
-    public function register(RegisterProjectRequest $request)
+    public function store(RegisterProjectRequest $request)
     {
         $data = $request->validated();
 
-        // FacadesLog::info('Datos recibidos en el controlador:', $data);
+        if ($request->hasFile('image')) {
+            $imagen = $request->file('image')->store('public/projects');
+            $name_image = str_replace('public/projects/', '', $imagen);
+        }
 
         $project = JobPosting::create([
             'name' => $data['name'],
             'time_id' => $data['time_id'],
             'description' => $data['description'],
             'honorarios' => $data['honorarios'],
-            // 'image' => $data['image'],
+            'image' => $name_image,
             'user_id' => auth()->user()->id,
         ]);
 

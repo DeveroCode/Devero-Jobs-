@@ -22,7 +22,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 
     // Start routes for Projects
-    Route::post('/project-register', [JobPostingController::class, 'register']);
+    Route::post('/project-register', [JobPostingController::class, 'store']);
     Route::get('/projects', [JobPostingController::class, 'show']);
 });
 

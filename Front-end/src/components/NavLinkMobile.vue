@@ -4,7 +4,7 @@ import { XMarkIcon } from '@heroicons/vue/24/outline'
 
 const props = defineProps({
     toggleMenu: Function
-})
+});
 </script>
 
 <template>
@@ -15,8 +15,9 @@ const props = defineProps({
         <section class=" flex flex-col space-y-2 text-gray-500">
             <RouterLink :to="{ name: 'home' }" class="hover:text-black">Home</RouterLink>
             <RouterLink :to="{ name: 'home' }" class="hover:text-black">Categorias</RouterLink>
-            <RouterLink :to="{ name: 'home' }" class="hover:text-black">Home</RouterLink>
-            <RouterLink :to="{ name: 'home' }" class="hover:text-black">Home</RouterLink>
+            <RouterLink :to="{ name: 'projects' }" class="hover:text-black">Proyectos</RouterLink>
+            <RouterLink :to="{ name: 'home' }" class="hover:text-black">Empresas</RouterLink>
+            <RouterLink :to="{ name: 'home' }" class="hover:text-black">Sobre Nosotros</RouterLink>
         </section>
 
         <section class="flex flex-col space-y-5">

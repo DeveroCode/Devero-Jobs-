@@ -26,6 +26,7 @@ class RegisterProjectRequest extends FormRequest
             'time_id' => ['required', 'string'],
             'description' => ['required', 'string'],
             'honorarios' => ['required', 'integer'],
+            'image' => 'image|max:2048|nullable',
         ];
     }
 

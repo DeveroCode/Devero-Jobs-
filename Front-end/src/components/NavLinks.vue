@@ -5,8 +5,9 @@
     <section class="hidden md:block space-x-10 text-gray-500">
         <RouterLink :to="{ name: 'home' }" class="hover:text-black">Home</RouterLink>
         <RouterLink :to="{ name: 'home' }" class="hover:text-black">Categorias</RouterLink>
-        <RouterLink :to="{ name: 'home' }" class="hover:text-black">Home</RouterLink>
-        <RouterLink :to="{ name: 'home' }" class="hover:text-black">Home</RouterLink>
+        <RouterLink :to="{ name: 'projects' }" class="hover:text-black">Proyectos</RouterLink>
+        <RouterLink :to="{ name: 'home' }" class="hover:text-black">Empresas</RouterLink>
+        <RouterLink :to="{ name: 'home' }" class="hover:text-black">Sobre Nosotros</RouterLink>
     </section>
 
     <section class="hidden md:block space-x-10">

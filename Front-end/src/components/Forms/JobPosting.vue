@@ -1,8 +1,10 @@
 <script setup>
 import { ref, onMounted, reactive } from 'vue';
 import { jobPosting } from '@/stores/JobPosting.js';
+import useImageUpload from '@/composables/useUploadImage';
 
 const { timeJob, registerProject } = jobPosting();
+const { onFileChange, image } = useImageUpload();
 const errores = ref({});
 const time = reactive({});
 
@@ -12,7 +14,7 @@ const job = reactive({
     'time_id': '',
     'description': '',
     'honorarios': '',
-    // 'image': ''
+    'image': null,
 });
 
 const handleSubmit = () => {
@@ -21,9 +23,10 @@ const handleSubmit = () => {
         'time_id': job.time_id,
         'description': job.description,
         'honorarios': job.honorarios,
-        // 'image': job.image
+        'image': image.value
     }
 
+    // console.log(data);
     registerProject(data, errores);
 }
 
@@ -102,12 +105,13 @@ onMounted(() => {
         <fieldset
             class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-gray-200 pb-5 mt-10">
             <div class="w-full md:w-1/3 mb-3 md:mb-0 md:mr-3">
-                <h1 class="text-title font-popins font-bold">Imagen</h1>
-                <span class="text-gray-500 text-sm font-popins w-full block">Una imagen con los requisitos que
-                    necesitas, ayudaría al postulante</span>
+                <h1 class="text-title font-popins font-bold">Icono de la empresa</h1>
+                <span class="text-gray-500 text-sm font-popins w-full block">Mejora la visibilidad de tu proyecto!
+                    Agrega el icono de tu empresa aquí."
+                </span>
             </div>
             <div class="w-full md:w-2/3">
-                <FormKit type="file" name="image" accept=".pgn, .jpg, .png, .jpeg, .webp" v-model="job.image" />
+                <FormKit type="file" name="image" accept="image/*" @change="onFileChange" />
             </div>
         </fieldset>
 

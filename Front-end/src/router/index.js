@@ -9,6 +9,7 @@ import DashboardView from '@/views/DashboardView.vue'
 import ProjectsView from '@/views/ProjectsView.vue'
 import Profile from '@/components/Profile.vue'
 import JobViewVue from '@/views/JobView.vue'
+import ProjectsLayoutVue from '@/Layouts/ProjectsLayout.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,6 +23,11 @@ const router = createRouter({
           index: true,
           path: '',
           component: HomeView
+        },
+        {
+          path: '/projects',
+          name: 'projects',
+          component: ProjectsLayoutVue
         }
       ]
     },
@@ -71,7 +77,7 @@ const router = createRouter({
           component: JobViewVue
         }
       ]
-    }
+    },
   ]
 })
 
