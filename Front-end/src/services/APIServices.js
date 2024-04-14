@@ -43,10 +43,6 @@ export default {
     },
 
     getProjects() {
-        return clientApi.get('/api/projects', {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
+        return clientApi.get('/api/project');
     }
 }

@@ -1,11 +1,18 @@
 <script setup>
+import { defineProps } from 'vue';
+
+defineProps({
+    selectProject: Object
+});
+
 </script>
 
 <template>
-    <section class="bg-white rounded-md px-10 py-10">
-        <div class="flex justify-between mb-10">
+    <section class="bg-white rounded-md px-6 py-10">
+        <div class="flex justify-between mb-10 gap-3">
+            <img :src="selectProject.image" alt="" class="w-24">
             <div>
-                <h2 class="font-poppins font-bold font-title text-xl">Aplicacion en Kotlin</h2>
+                <h2 class="font-poppins font-bold font-title text-xl">{{ selectProject.name }}</h2>
                 <span class="block">DeveroCode</span>
             </div>
 
@@ -18,10 +25,7 @@
         <div class="py-2">
             <p class="font-poppins font-bold">Proyecto a realizar</p>
             <span class="font-poppins">
-                Necesito un desarrollador en Kotlin, la aplicacion debera permitir al usuario interacturar en
-                tiempo
-                real con la empresa, podra ver nuestra gran variedad de menu. Podra apartar una mesa o pedir un
-                pedido.
+                {{ selectProject.description }}
             </span>
         </div>
 

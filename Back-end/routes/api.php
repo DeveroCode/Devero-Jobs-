@@ -19,11 +19,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::put('/update', [AuthController::class, 'update']);
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::post('/logout', [AuthController::class, 'logout']);
 
     // Start routes for Projects
     Route::post('/project-register', [JobPostingController::class, 'store']);
-    Route::get('/projects', [JobPostingController::class, 'show']);
 });
 
 // Resources
@@ -31,3 +29,6 @@ Route::get('/time', [TimeController::class, 'index']);
 Route::apiResource('/type_user', TypeUserController::class);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+
+// Start routes for Projects
+Route::get('/project', [JobPostingController::class, 'show']);

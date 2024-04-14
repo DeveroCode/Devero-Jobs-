@@ -14,10 +14,14 @@ class ProjectsResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $imagePath = '/projects/' . $this->image;
+        $imageUrl = asset('/storage' . $imagePath);
+
         return [
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
+            'image' => $imageUrl,
         ];
     }
 }
