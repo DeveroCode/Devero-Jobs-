@@ -12,6 +12,8 @@ class JobPostingController extends Controller
     {
         $data = $request->validated();
 
+        // info($request->all());
+
         if ($request->hasFile('image')) {
             $imagen = $request->file('image')->store('public/projects');
             $name_image = str_replace('public/projects/', '', $imagen);
@@ -20,6 +22,7 @@ class JobPostingController extends Controller
         $project = JobPosting::create([
             'name' => $data['name'],
             'time_id' => $data['time_id'],
+            'empresa' => $data['empresa'],
             'description' => $data['description'],
             'honorarios' => $data['honorarios'],
             'image' => $name_image,

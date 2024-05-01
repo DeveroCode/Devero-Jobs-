@@ -12,6 +12,7 @@ class JobPosting extends Model
     protected $fillable = [
         'name',
         'time_id',
+        'empresa',
         'description',
         'honorarios',
         'image',

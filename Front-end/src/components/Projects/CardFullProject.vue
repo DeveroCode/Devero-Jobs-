@@ -13,7 +13,7 @@ defineProps({
             <img :src="selectProject.image" alt="" class="w-24">
             <div>
                 <h2 class="font-poppins font-bold font-title text-xl">{{ selectProject.name }}</h2>
-                <span class="block">DeveroCode</span>
+                <span class="block text-title font-poppins text-lg">{{ selectProject.empresa }}</span>
             </div>
 
             <div>

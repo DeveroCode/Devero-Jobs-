@@ -9,7 +9,7 @@ const config = {
                 message: 'text-red-500 text-sm font-poppins capitalize'
             },
             file: {
-                input: 'rounded-md border border-icons border-dashed py-36 px-3 w-full, bg-main',
+                input: 'rounded-md border border-icons border-dashed px-3 w-full, bg-main',
                 noFile: 'block my-2',
                 fileItem: 'hidden'
             },

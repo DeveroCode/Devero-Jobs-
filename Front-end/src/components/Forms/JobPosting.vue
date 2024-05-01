@@ -12,6 +12,7 @@ const time = reactive({});
 const job = reactive({
     'name': '',
     'time_id': '',
+    'empresa': '',
     'description': '',
     'honorarios': '',
     'image': null,
@@ -21,6 +22,7 @@ const handleSubmit = () => {
     const data = {
         'name': job.name,
         'time_id': job.time_id,
+        'empresa': job.empresa,
         'description': job.description,
         'honorarios': job.honorarios,
         'image': image.value
@@ -73,6 +75,19 @@ onMounted(() => {
         <fieldset
             class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-gray-200 pb-5 mt-10">
             <div class="w-full md:w-1/3 mb-3 md:mb-0 md:mr-3">
+                <h1 class="text-title font-popins font-bold">Empresa</h1>
+                <span class="text-gray-500 text-sm font-popins">Seleccione el nombre de tu empres, en caso de ser
+                    independiente, deje el campo vacío.</span>
+            </div>
+            <div class="w-full md:w-2/3">
+                <FormKit type="text" name="empresa" placeholder="Ej: Uber" v-model="job.empresa" />
+            </div>
+        </fieldset>
+
+        <!-- Campo 4 -->
+        <fieldset
+            class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-gray-200 pb-5 mt-10">
+            <div class="w-full md:w-1/3 mb-3 md:mb-0 md:mr-3">
                 <h1 class="text-title font-popins font-bold">Tiempo</h1>
                 <span class="text-gray-500 text-sm font-popins">Seleccione la modalidad o la duración deseada para la
                     realización del proyecto.</span>
@@ -87,7 +102,7 @@ onMounted(() => {
             </div>
         </fieldset>
 
-        <!-- Campo 4 -->
+        <!-- Campo 5 -->
         <fieldset
             class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-gray-200 pb-5 mt-10">
             <div class="w-full md:w-1/3 mb-3 md:mb-0 md:mr-3">
@@ -101,7 +116,7 @@ onMounted(() => {
             </div>
         </fieldset>
 
-        <!-- Campo 5 -->
+        <!-- Campo 6 -->
         <fieldset
             class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-gray-200 pb-5 mt-10">
             <div class="w-full md:w-1/3 mb-3 md:mb-0 md:mr-3">

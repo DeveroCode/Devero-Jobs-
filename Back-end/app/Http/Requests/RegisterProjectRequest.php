@@ -24,6 +24,7 @@ class RegisterProjectRequest extends FormRequest
         return [
             'name' => ['required', 'string'],
             'time_id' => ['required', 'string'],
+            'empresa' => ['nullable', 'string'],
             'description' => ['required', 'string'],
             'honorarios' => ['required', 'integer'],
             'image' => 'image|max:2048|nullable',

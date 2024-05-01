@@ -1,6 +1,9 @@
 <script setup>
 import { defineProps, ref } from 'vue';
 import { authMethods } from '@/stores/authMethods';
+import useIMageUpload from '@/composables/useUploadImage';
+
+const { onFileChange, image } = useIMageUpload();
 
 defineProps({
     users: Object // 
@@ -18,9 +21,17 @@ const handleSubmit = users => {
         password: users.password,
         password_confirmation: users.password_confirmation,
     }
-
     updateUser(data, errores)
 };
+
+const handeleImageSubmit = users => {
+    const data = {
+        image: image.value
+    }
+
+    console.log(data);
+    // updateUser(data, errores)
+}
 </script>
 
 <template>
@@ -28,7 +39,8 @@ const handleSubmit = users => {
         <h1 class="text-title font-popins font-bold text-2xl">Ajustes</h1>
 
         <section class="flex flex-col lg:flex-row md:justify-between py-10 2xl:py-16">
-            <div class="bg-white rounded-sm shadow-md border border-gray-300 md:full 2xl:w-[60%]">
+            <!-- Information -->
+            <div class="bg-white rounded-sm shadow-md border border-gray-300 md:w-[60%]">
                 <div class="border-b border-stroke py-4 px-7">
                     <p class="text-title font-popins text-md capitalize">
                         información personal
@@ -38,44 +50,56 @@ const handleSubmit = users => {
                 <div class="py-10 px-10 mx-auto">
                     <FormKit type="form" :actions="false" @submit="handleSubmit">
                         <fieldset class="flex flex-col md:flex-row md:justify-between">
-                            <FormKit type="text" name="name" label="Nombre(s)" placeholder="Ej: Carlos ALberto"
-                                v-model="users.name" />
-                            <FormKit type="text" name="apellidos" label="Apellido(s)" placeholder="Ej: Martinez"
-                                v-model="users.apellidos" />
+                            <div class="w-full md:w-1/2 mb-3 md:mb-0 md:mr-3">
+                                <FormKit type="text" name="name" label="Nombre(s)" placeholder="Ej: Carlos ALberto"
+                                    v-model="users.name" />
+                            </div>
+                            <div class="w-full md:w-1/2 mb-3 md:mb-0 md:mr-3">
+                                <FormKit type="text" name="apellidos" label="Apellido(s)" placeholder="Ej: Martinez"
+                                    v-model="users.apellidos" />
+                            </div>
                         </fieldset>
 
                         <fieldset class="flex flex-col md:flex-row md:justify-between">
-                            <FormKit type="email" name="email" label="Correo" placeholder="Ej: Devero@code.com"
-                                validation="required|email"
-                                :validation-messages="{ required: 'El email no debe ser vacío', email: 'El email no es correcto' }"
-                                validation-visibility="summit" v-model="users.email" />
-
-
-                            <FormKit type="text" name="username" label="Username" placeholder="Ej: DeveroCode"
-                                v-model="users.username" />
+                            <div class="w-full md:w-1/2 mb-3 md:mb-0 md:mr-3">
+                                <FormKit type="email" name="email" label="Correo" placeholder="Ej: Devero@code.com"
+                                    validation="required|email"
+                                    :validation-messages="{ required: 'El email no debe ser vacío', email: 'El email no es correcto' }"
+                                    validation-visibility="summit" v-model="users.email" />
+                            </div>
+                            <div class="w-full md:w-1/2 mb-3 md:mb-0 md:mr-3">
+                                <FormKit type="text" name="username" label="Username" placeholder="Ej: DeveroCode"
+                                    v-model="users.username" />
+                            </div>
                         </fieldset>
 
 
                         <!-- Confirmed the password for update profile -->
                         <div class="flex justify-between flex-col md:flex-row">
-                            <FormKit type="password" name="password" label="Password" placeholder="password"
-                                v-model="users.password" />
-                            <FormKit type="password" name="password_confirmation" label="Repetir Password"
-                                placeholder="confirma tu password" v-model="users.password_confirmation" />
+                            <div class="w-full md:w-1/2 mb-3 md:mb-0 md:mr-3">
+                                <FormKit type="password" name="password" label="Password" placeholder="password"
+                                    v-model="users.password" />
+                            </div>
+                            <div class="w-full md:w-1/2 mb-3 md:mb-0 md:mr-3">
+                                <FormKit type="password" name="password_confirmation" label="Repetir Password"
+                                    placeholder="confirma tu password" v-model="users.password_confirmation" />
+                            </div>
                         </div>
 
-                        <div class="flex justify-end gap-5">
+                        <div class="flex md:flex-row flex-col justify-end gap-5 pr-0 md:pr-14">
                             <button
-                                class="py-2 mt-6 px-6 rounded-md border border-title text-title font-popins uppercase">
+                                class="py-2 w-full md:w-1/4 mt-6 px-6 rounded-md border border-title text-title font-popins uppercase">
                                 Cancelar
                             </button>
-                            <button class="py-2 mt-6 px-6 bg-header rounded-md text-white font-popins uppercase">
+                            <button
+                                class="py-2 w-full md:w-1/4 mt-6 px-6 bg-header rounded-md text-white font-popins uppercase">
                                 Guardar
                             </button>
                         </div>
                     </FormKit>
                 </div>
             </div>
+            <!-- Image Profile -->
             <div class="w-full mt-10 lg:mt-0 lg:w-1/3">
                 <div class="bg-white rounded-sm shadow-md border border-gray-300">
                     <div class="border-b border-stroke py-4 px-7">
@@ -85,42 +109,20 @@ const handleSubmit = users => {
                     </div>
 
                     <div class="py-10 px-10">
+                        <FormKit type="form" :actions="false" @submit="handeleImageSubmit">
+                            <FormKit type="file" name="image" label="Fotografia" accept="image/*" v-model="users.image"
+                                @change="onFileChange" />
 
-                        <div id="FileUpload"
-                            class="relative mb-5.5 block w-full cursor-pointer appearance-none rounded border-2 border-dashed border-primary bg-gray py-4 px-4 dark:bg-meta-4 sm:py-7.5">
-                            <input type="file" accept="image/*"
-                                class="absolute inset-0 z-50 m-0 h-full w-full cursor-pointer p-0 opacity-0 outline-none">
-                            <div class="flex flex-col items-center justify-center space-y-3">
-                                <span class="flex h-10 w-10 items-center justify-center rounded-full border border-stroke
-                                    bg-white dark:border-strokedark dark:bg-boxdark"><svg width="16" height="16"
-                                        viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M1.99967 9.33337C2.36786 9.33337 2.66634 9.63185 2.66634 10V12.6667C2.66634 12.8435 2.73658 13.0131 2.8616 13.1381C2.98663 13.2631 3.1562 13.3334 3.33301 13.3334H12.6663C12.8431 13.3334 13.0127 13.2631 13.1377 13.1381C13.2628 13.0131 13.333 12.8435 13.333 12.6667V10C13.333 9.63185 13.6315 9.33337 13.9997 9.33337C14.3679 9.33337 14.6663 9.63185 14.6663 10V12.6667C14.6663 13.1971 14.4556 13.7058 14.0806 14.0809C13.7055 14.456 13.1968 14.6667 12.6663 14.6667H3.33301C2.80257 14.6667 2.29387 14.456 1.91879 14.0809C1.54372 13.7058 1.33301 13.1971 1.33301 12.6667V10C1.33301 9.63185 1.63148 9.33337 1.99967 9.33337Z"
-                                            fill="#3C50E0"></path>
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M7.5286 1.52864C7.78894 1.26829 8.21106 1.26829 8.4714 1.52864L11.8047 4.86197C12.0651 5.12232 12.0651 5.54443 11.8047 5.80478C11.5444 6.06513 11.1223 6.06513 10.8619 5.80478L8 2.94285L5.13807 5.80478C4.87772 6.06513 4.45561 6.06513 4.19526 5.80478C3.93491 5.54443 3.93491 5.12232 4.19526 4.86197L7.5286 1.52864Z"
-                                            fill="#3C50E0"></path>
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M7.99967 1.33337C8.36786 1.33337 8.66634 1.63185 8.66634 2.00004V10C8.66634 10.3682 8.36786 10.6667 7.99967 10.6667C7.63148 10.6667 7.33301 10.3682 7.33301 10V2.00004C7.33301 1.63185 7.63148 1.33337 7.99967 1.33337Z"
-                                            fill="#3C50E0"></path>
-                                    </svg></span>
-                                <p class="text-sm font-medium"><span class="text-primary">Click to upload</span> or
-                                    drag
-                                    and drop </p>
-                                <p class="mt-1.5 text-sm font-medium">SVG, PNG, JPG or GIF</p>
-                                <p class="text-sm font-medium">(max, 800 X 800px)</p>
+                            <div class="flex justify-end gap-10">
+                                <button
+                                    class="py-2 mt-6 px-6 rounded-md border border-title text-title font-popins uppercase">
+                                    Cancelar
+                                </button>
+                                <button class="py-2 mt-6 px-6 bg-header rounded-md text-white font-popins uppercase">
+                                    Guardar
+                                </button>
                             </div>
-                        </div>
-
-                        <div class="flex justify-end gap-10">
-                            <button
-                                class="py-2 mt-6 px-6 rounded-md border border-title text-title font-popins uppercase">
-                                Cancelar
-                            </button>
-                            <button class="py-2 mt-6 px-6 bg-header rounded-md text-white font-popins uppercase">
-                                Guardar
-                            </button>
-                        </div>
+                        </FormKit>
                     </div>
                 </div>
             </div>
