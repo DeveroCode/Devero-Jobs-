@@ -37,7 +37,7 @@ export function print(errores, error) {
     errores.value = e;
     // Fin de los errores
     notification.mostrar = true;
-    notification.texto = 'Error al iniciar sesion'
+    notification.texto = texto.value;
     notification.error = true;
     notification.errors = errores.value; // Alamacenamos solo los errores en string
 }

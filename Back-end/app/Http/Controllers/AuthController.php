@@ -82,17 +82,16 @@ class AuthController extends Controller
             $data['image'] = $name_image;
         }
 
-        // // Verificar si se proporcionó una contraseña en la solicitud
-        // if (isset($data['password'])) {
-        //     // Verificar si la contraseña proporcionada coincide con la contraseña actual del usuario
-        //     if (!password_verify($data['password'], $user->password)) {
-        //         return response()->json(['error' => 'La contraseña actual es incorrecta'], 401);
-        //     }
+        // Verificar si se proporcionó una contraseña en la solicitud
+        if (!isset($data['password'])) {
+            // Verificar si la contraseña proporcionada coincide con la contraseña actual del usuario
+            if (!password_verify($data['password'], $user->password)) {
+                return response()->json(['error' => 'La contraseña actual es incorrecta'], 401);
+            }
+        }
 
-        //     // Eliminar la contraseña del array de datos
-        //     unset($data['password']);
-        // }
-
+        // Eliminar la contraseña del array de datos
+        unset($data['password']);
         // Actualizar el perfil del usuario
         $user->update($data);
         return response()->json(['message' => 'Perfil actualizado correctamente', 'user' => $user]);

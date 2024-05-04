@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\ConfirmPassword;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -25,13 +24,17 @@ class UpdateProfileRequest extends FormRequest
     {
 
         $rules = [
-            // data validate for update profile
+            // datos a validar para actualizar el perfil
             'name' => ['nullable', 'string', 'max:255'],
-            'appellidos' => ['nullable', 'string', 'max:255'],
+            'apellidos' => ['nullable', 'string', 'max:255'],
             'email' => ['nullable', 'string', 'email', 'max:255', Rule::unique('users')->ignore($this->user()->id)],
             'username' => ['nullable', 'string', 'max:255', Rule::unique('users')->ignore($this->user()->id)],
-            'password' => ['nullable', 'string', new ConfirmPassword($this->user())],
         ];
+
+        if ($this->filled('password')) {
+            $rules['password'] = ['required', 'string', 'min:8', 'confirmed'];
+        }
+
         return $rules;
     }
 

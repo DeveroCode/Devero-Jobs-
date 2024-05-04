@@ -109,7 +109,7 @@ const handleSubmit = () => {
                                 <FormKit type="file" name="image" label="Fotografia" accept="image/*"
                                     @change="onFileChange" />
 
-                                <img :src="users.image ? users.image : imageUrl" class="w-full" />
+                                <img :src="imageUrl ? imageUrl : users.image" class="w-full" />
                             </div>
                         </div>
                     </div>

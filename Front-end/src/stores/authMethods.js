@@ -44,6 +44,17 @@ export const authMethods = defineStore('auth', () => {
             notification.success = 'Usuario actualizado correctamente';
             router.push({ name: 'dashboard' });
         } catch (error) {
+            if (error.response.status === 500) {
+                notification.mostrar = false;
+                notification.texto = 'Error al actualizar el usuario';
+                notification.error = true;
+                notification.success = 'La contraseña es requerida para guardar cambios';
+            } else if (error.response.status === 422) {
+                notification.mostrar = false;
+                notification.texto = 'Error al actualizar el usuario';
+                notification.error = true;
+                notification.success = 'La contraseñas no coinciden';
+            }
             print(errores, error);
 
             // console.log(error);
