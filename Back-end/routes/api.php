@@ -14,10 +14,15 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth:sanctum'])->group(function () {
     // Ruta para obtener los datos del usuario
     Route::get('/user', function (Request $request) {
-        return $request->user();
+        $user = $request->user();
+        $imagePath = '/users/' . $user->image;
+        $imageUrl = asset('/storage' . $imagePath);
+        $user['image'] = $imageUrl;
+
+        return $user;
     });
 
-    Route::put('/update', [AuthController::class, 'update']);
+    Route::post('/update', [AuthController::class, 'update']);
     Route::post('/logout', [AuthController::class, 'logout']);
 
     // Start routes for Projects

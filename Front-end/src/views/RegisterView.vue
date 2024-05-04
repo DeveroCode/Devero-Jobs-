@@ -40,8 +40,6 @@ const handleSubmit = () => {
         <h1 class="text-4xl font-bold font-popins text-title">Registrarse</h1>
         <span class="text-sm text-gray-500">Crea una cuenta para enterarte del avance de tu proyecto</span>
         <FormKit type="form" :actions="false" @submit="handleSubmit">
-            <FormKitMessages />
-
             <FormKit type="text" name="name" label="Nombre(s)" v-model="user.name" placeholder="Ej: Mauricio Jesús" />
 
             <FormKit type="text" name="apellidos" label="Apellido(s)" v-model="user.apellidos"
@@ -65,7 +63,8 @@ const handleSubmit = () => {
                 Ya tengo una cuenta
             </RouterLink>
 
-            <input type="submit" class="py-2 px-6 bg-header rounded-md text-white font-popins uppercase col-span-2"
+            <input type="submit"
+                class="py-2 px-6 cursor-pointer bg-header rounded-md text-white font-popins uppercase col-span-2"
                 value="Registrarse">
         </FormKit>
     </section>

@@ -24,7 +24,7 @@ const handleSubmit = () => {
 </script>
 
 <template>
-    <section class="mx-auto">
+    <section class="mx-auto py-0 md:py-20">
         <h1 class="text-4xl font-bold font-popins text-title">Iniciar Sesión</h1>
         <span class="text-sm text-gray-500 font-popins">Ingresa tus credenciales para acceder a tu panel de
             control</span>
@@ -46,7 +46,8 @@ const handleSubmit = () => {
                     </RouterLink>
                 </div>
 
-                <button class="py-2 px-6 bg-header rounded-md text-white font-popins uppercase">
+                <button type="submit"
+                    class="py-2 px-6 bg-header rounded-md text-white font-popins uppercase cursor-pointer">
                     Iniciar
                 </button>
             </FormKit>

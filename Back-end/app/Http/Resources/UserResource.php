@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProjectsResource extends JsonResource
+class UserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,15 +14,16 @@ class ProjectsResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $imagePath = '/projects/' . $this->image;
+        $imagePath = '/users/' . $this->image;
         $imageUrl = asset('/storage' . $imagePath);
 
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'empresa' => $this->empresa,
-            'description' => $this->description,
+            'email' => $this->email,
             'image' => $imageUrl,
+            'type_user' => $this->type_user,
+            'apellidos' => $this->apellidos,
         ];
     }
 }

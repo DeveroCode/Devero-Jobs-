@@ -9,7 +9,7 @@ export default {
         return clientApi.post('/api/login', data);
     },
     update(data) {
-        return clientApi.put('/api/update', data, {
+        return clientApi.post('/api/update', data, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

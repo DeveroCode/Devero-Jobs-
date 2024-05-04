@@ -5,13 +5,20 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\UpdateProfileRequest;
+use App\Http\Resources\UserCollection;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
     //
+
+    public function show()
+    {
+        return new UserCollection(User::all());
+    }
 
     public function logout(Request $request)
     {
@@ -64,21 +71,31 @@ class AuthController extends Controller
 
     public function update(UpdateProfileRequest $request)
     {
-        $data = $request->validated();
+        $data = $request->all(); // Obtener todos los datos de la solicitud
         $user = Auth::user();
 
-        // Verificar si la contraseña proporcionada coincide con la contraseña actual del usuario
-        // Verificar si la contraseña actual coincide
-        if (!password_verify($data['password'], $user->password)) {
-            return response()->json(['error' => 'La contraseña actual es incorrecta'], 401);
+        Log::info('Datos recibidos para la actualización:', $data);
+
+        if ($request->hasFile('image')) {
+            $imagen = $request->file('image')->store('public/users');
+            $name_image = str_replace('public/users/', '', $imagen);
+            $data['image'] = $name_image;
         }
 
-        // La contraseña actual coincide, proceder con la actualización del perfil
-        unset($data['password']); // Eliminar la contraseña del array de datos
+        // // Verificar si se proporcionó una contraseña en la solicitud
+        // if (isset($data['password'])) {
+        //     // Verificar si la contraseña proporcionada coincide con la contraseña actual del usuario
+        //     if (!password_verify($data['password'], $user->password)) {
+        //         return response()->json(['error' => 'La contraseña actual es incorrecta'], 401);
+        //     }
+
+        //     // Eliminar la contraseña del array de datos
+        //     unset($data['password']);
+        // }
 
         // Actualizar el perfil del usuario
         $user->update($data);
-
+        return response()->json(['message' => 'Perfil actualizado correctamente', 'user' => $user]);
         return $user;
     }
 }

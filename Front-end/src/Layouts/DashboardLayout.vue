@@ -5,7 +5,7 @@ import Search from '@/components/SearchProjects.vue';
 import { authMethods } from '@/stores/authMethods';
 
 const { dataUser } = authMethods();
-const users = ref([]);
+const users = ref({});
 
 
 onMounted(async () => {

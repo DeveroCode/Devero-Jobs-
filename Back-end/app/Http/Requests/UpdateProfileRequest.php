@@ -30,14 +30,8 @@ class UpdateProfileRequest extends FormRequest
             'appellidos' => ['nullable', 'string', 'max:255'],
             'email' => ['nullable', 'string', 'email', 'max:255', Rule::unique('users')->ignore($this->user()->id)],
             'username' => ['nullable', 'string', 'max:255', Rule::unique('users')->ignore($this->user()->id)],
-            'password' => ['required', 'string', new ConfirmPassword($this->user())],
+            'password' => ['nullable', 'string', new ConfirmPassword($this->user())],
         ];
-
-        // Si el campo password no está vacío, agregamos la regla ConfirmPassword
-        if (!empty($this->password)) {
-            $rules['password'] = ['nullable', 'string', new ConfirmPassword($this->user())];
-        }
-
         return $rules;
     }
 

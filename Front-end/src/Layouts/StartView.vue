@@ -9,15 +9,14 @@ const router = useRoute();
 </script>
 
 <template>
-    <div class="h-max 3xl:h-screen bg-white">
+    <div class="h-screen bg-white">
         <div>
             <div class="w-36 py-10 md:py-0">
                 <RouterLink :to="{ name: 'home' }">
                     <img :src="Logo" class="w-64 md:w-36 mx-auto md:mx-16 md:py-2" />
                 </RouterLink>
             </div>
-            <div
-                class="flex flex-col max-w-7xl md:flex-row md:py-7 lg:justify-center md:items-center mx-auto 2xl:py-20">
+            <div class="flex flex-col max-w-7xl md:flex-row md:py-7 lg:justify-center md:items-center mx-auto 2xl:py-4">
                 <RouterView class="px-10 md:w-1/2 w-full" />
                 <div class="md:w-1/2 hidden md:block" v-if="router.name === 'login'">
                     <p class="text-center font-popins text-title">Nos alegramos de verte de regreso</p>
