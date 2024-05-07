@@ -1,4 +1,4 @@
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 
 export default function useImageUpload() {
     const image = ref({});
@@ -9,7 +9,9 @@ export default function useImageUpload() {
         image.value = file
 
         if (file) {
+            // Here validate new image
             imageUrl.value = URL.createObjectURL(file);
+
         } else {
             imageUrl.value = '';
         }

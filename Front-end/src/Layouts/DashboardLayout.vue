@@ -23,7 +23,7 @@ const toggleMenu = () => {
 <template>
     <div class="bg-main">
         <div class="grid grid-cols-12">
-            <Aside class="md:col-span-2" :toggleMenu="toggleMenu"
+            <Aside class="md:col-span-2" :toggleMenu="toggleMenu" :users="users"
                 :class="open ? 'block w-[250px] fixed top-0 left-0 z-20 slideRight' : 'hidden lg:block'" />
             <div class="col-span-12 ml-0 lg:ml-60">
                 <Search :users="users" :toggleMenu="toggleMenu" />

@@ -1,10 +1,24 @@
 <script setup>
 import { PencilSquareIcon, EyeIcon, ArchiveBoxXMarkIcon } from '@heroicons/vue/24/outline';
-import { defineProps } from 'vue';
+import { defineProps, ref } from 'vue';
+import { jobPosting } from '@/stores/JobPosting'
+import router from '@/router';
+
+const { getProject } = jobPosting();
+const dataProject = ref(null);
 
 defineProps({
     project: Object
 })
+
+const handleGetProject = async (id) => {
+    const response = await getProject(id);
+    dataProject.value = response;
+    console.log(dataProject.value);
+    //  save dataProject in localstorage
+    localStorage.setItem('dataProject', JSON.stringify(dataProject.value));
+    router.push({ name: 'editar', params: { id: dataProject.value.id } });
+};
 </script>
 
 <template>
@@ -25,7 +39,7 @@ defineProps({
                     <h5 class="text-sm font-medium uppercase xsm:text-base">Herramientas</h5>
                 </th>
             </tr>
-            <tr v-for="(job, index) in project" :key="index" class="grid grid-cols-3 sm:grid-cols-3">
+            <tr v-for="(job, index) in  project " :key="index" class="grid grid-cols-3 sm:grid-cols-3">
                 <td class="flex items-center gap-3 p-2 xl:p-5">
                     <p class="text-black">{{ job.name }}</p>
                 </td>
@@ -34,7 +48,7 @@ defineProps({
                 </td>
                 <td class="p-2 xl:p-5 mx-auto">
                     <div class="flex gap-5">
-                        <button>
+                        <button @click="handleGetProject(job.id)">
                             <PencilSquareIcon class="w-7 text-title" />
                         </button>
                         <button>
@@ -47,7 +61,5 @@ defineProps({
                 </td>
             </tr>
         </table>
-
-
     </div>
 </template>

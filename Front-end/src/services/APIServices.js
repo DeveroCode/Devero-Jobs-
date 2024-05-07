@@ -41,8 +41,21 @@ export default {
             }
         });
     },
-
     getProjects() {
         return clientApi.get('/api/project');
+    },
+    getProject(id) {
+        return clientApi.get(`/api/project-edit/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+    },
+    updateProject(data) {
+        return clientApi.post('/api/updateProject', data, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
     }
 }

@@ -10,7 +10,7 @@ defineProps({
 <template>
     <section class="bg-white rounded-md px-6 py-10">
         <div class="flex justify-between mb-10 gap-3">
-            <img :src="selectProject.image" alt="" class="w-24">
+            <img :src="selectProject.image" alt="Image for project" class="w-32">
             <div>
                 <h2 class="font-poppins font-bold font-title text-xl">{{ selectProject.name }}</h2>
                 <span class="block text-title font-poppins text-lg">{{ selectProject.empresa }}</span>

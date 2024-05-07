@@ -8,7 +8,8 @@ import Logo from '/logo.png'
 const { logout } = authMethods();
 
 defineProps({
-    toggleMenu: Function
+    toggleMenu: Function,
+    users: Object
 });
 
 </script>
@@ -48,7 +49,7 @@ defineProps({
                             Proyectos
                         </RouterLink>
 
-                        <RouterLink :to="{ name: 'publicar' }"
+                        <RouterLink :to="{ name: 'publicar' }" v-if="users.type_user_id === 1"
                             class="flex px-3 hover:text-back transition-colors duration-300 gap-5 items-center font-popins text-white">
                             <BriefcaseIcon class="w-7" />
                             Publicar

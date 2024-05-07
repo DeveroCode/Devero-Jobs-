@@ -27,6 +27,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     // Start routes for Projects
     Route::post('/project-register', [JobPostingController::class, 'store']);
+    Route::get('/project-edit/{id}', [JobPostingController::class, 'project']);
+    Route::post('/updateProject', [JobPostingController::class, 'update']);
 });
 
 // Resources

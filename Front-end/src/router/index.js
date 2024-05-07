@@ -10,6 +10,7 @@ import ProjectsView from '@/views/ProjectsView.vue'
 import Profile from '@/components/Profile.vue'
 import JobViewVue from '@/views/JobView.vue'
 import ProjectsLayoutVue from '@/Layouts/ProjectsLayout.vue'
+import EditView from '@/views/Dashboard/EditProjectView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -64,6 +65,7 @@ const router = createRouter({
         {
           path: 'proyectos',
           name: 'proyectos',
+          props: true,
           component: ProjectsView
         },
         {
@@ -75,6 +77,12 @@ const router = createRouter({
           path: 'publicar',
           name: 'publicar',
           component: JobViewVue
+        },
+        {
+          path: 'editar/:id',
+          name: 'editar',
+          component: EditView,
+          props: true
         }
       ]
     },

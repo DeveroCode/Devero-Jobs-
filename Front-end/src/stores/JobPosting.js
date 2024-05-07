@@ -17,8 +17,7 @@ export const jobPosting = defineStore('job', () => {
             notification.success = 'Proyecto publicado correctamente';
             router.push({ name: 'proyectos' });
         } catch (error) {
-            // print(errores, error);
-            console.log(error);
+            print(errores, error);
         }
     }
 
@@ -40,9 +39,33 @@ export const jobPosting = defineStore('job', () => {
         }
     }
 
+    async function getProject(id) {
+        try {
+            const data = await APIServices.getProject(id);
+            return data.data
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async function updateProject(datas, errores) {
+        try {
+            const data = await APIServices.updateProject(datas);
+            notification.mostrar = true;
+            notification.texto = 'DeveroJobs';
+            notification.error = false;
+            notification.success = 'Proyecto actualizado correctamente';
+            router.push({ name: 'proyectos' });
+        } catch (error) {
+            print(errores, error);
+        }
+    }
+
     return {
         timeJob,
         registerProject,
-        projects
+        projects,
+        getProject,
+        updateProject
     }
 });

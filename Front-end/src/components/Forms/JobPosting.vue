@@ -1,25 +1,31 @@
 <script setup>
-import { ref, onMounted, reactive } from 'vue';
+import { ref, onMounted, reactive, watch } from 'vue';
 import { jobPosting } from '@/stores/JobPosting.js';
 import useImageUpload from '@/composables/useUploadImage';
 
-const { timeJob, registerProject } = jobPosting();
-const { onFileChange, image } = useImageUpload();
+const props = defineProps({
+    project: Object
+});
+
+const { timeJob, registerProject, updateProject } = jobPosting();
+const { onFileChange, image, imageUrl } = useImageUpload();
 const errores = ref({});
 const time = reactive({});
 
-
 const job = reactive({
-    'name': '',
-    'time_id': '',
-    'empresa': '',
-    'description': '',
-    'honorarios': '',
-    'image': null,
+    'name': props.project ? props.project.name : '',
+    'time_id': props.project ? props.project.time_id : '',
+    'empresa': props.project ? props.project.empresa : '',
+    'description': props.project ? props.project.description : '',
+    'honorarios': props.project ? props.project.honorarios : '',
+    'image': props.project ? props.project.image : null,
 });
+
+console.log(job);
 
 const handleSubmit = () => {
     const data = {
+        'id': props.project ? props.project.id : '',
         'name': job.name,
         'time_id': job.time_id,
         'empresa': job.empresa,
@@ -28,10 +34,13 @@ const handleSubmit = () => {
         'image': image.value
     }
 
-    // console.log(data);
-    registerProject(data, errores);
+    if (props.project) {
+        // console.log(data);
+        updateProject(data, errores);
+    } else {
+        registerProject(data, errores);
+    }
 }
-
 const typeTime = () => {
     timeJob(time)
 }
@@ -40,10 +49,14 @@ onMounted(() => {
     typeTime();
 });
 
+watch(imageUrl, (newValue, oldValue) => {
+    imageUrl.value = newValue
+});
+
 </script>
 
 <template>
-    <FormKit type="form" :actions="false" @submit="handleSubmit">
+    <FormKit type="form" :actions="false" @submit="handleSubmit()">
         <!-- Campo 1 -->
         <fieldset
             class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-gray-200 pb-5">
@@ -111,14 +124,13 @@ onMounted(() => {
                     este proyecto. La cantidad se tomará en dólares.</span>
             </div>
             <div class="w-full md:w-2/3">
-                <FormKit type="number" name="name" placeholder="Ej: Desarrollo Web" min="200" max="10000"
+                <FormKit type="number" name="honorarios" placeholder="Ej: Desarrollo Web" min="200" max="10000"
                     v-model="job.honorarios" />
             </div>
         </fieldset>
 
         <!-- Campo 6 -->
-        <fieldset
-            class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-gray-200 pb-5 mt-10">
+        <fieldset class="flex flex-col md:flex-row items-start justify-between border-b border-gray-200 pb-5 mt-10">
             <div class="w-full md:w-1/3 mb-3 md:mb-0 md:mr-3">
                 <h1 class="text-title font-popins font-bold">Icono de la empresa</h1>
                 <span class="text-gray-500 text-sm font-popins w-full block">Mejora la visibilidad de tu proyecto!
@@ -127,11 +139,14 @@ onMounted(() => {
             </div>
             <div class="w-full md:w-2/3">
                 <FormKit type="file" name="image" accept="image/*" @change="onFileChange" />
+
+                <img :src="imageUrl ? imageUrl : job.image" class="w-8/12" />
+
             </div>
         </fieldset>
 
         <input type="submit"
-            class="py-2 mt-10 px-6 cursor-pointer bg-header rounded-md text-white font-popins uppercase col-span-2 w-full md:w-[150px]"
-            value="Publicar">
+            class="py-2 mt-10 px-6 cursor-pointer bg-header rounded-md text-white font-popins uppercase col-span-2 w-full md:w-[250px]"
+            :value="props.project ? 'Actualizar proyecto' : 'Publicar proyecto'">
     </FormKit>
 </template>
