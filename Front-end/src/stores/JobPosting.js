@@ -61,11 +61,20 @@ export const jobPosting = defineStore('job', () => {
         }
     }
 
+    async function createCandidate(candidate, errores) {
+        try {
+            const data = await APIServices.candidate(candidate);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return {
         timeJob,
         registerProject,
         projects,
         getProject,
-        updateProject
+        updateProject,
+        createCandidate
     }
 });

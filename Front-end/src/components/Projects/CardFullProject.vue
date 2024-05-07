@@ -1,10 +1,16 @@
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps, ref } from 'vue';
+import Candidato from '@/components/Projects/Candidato.vue';
+const position = ref(false);
 
 defineProps({
-    selectProject: Object
+    selectProject: Object,
+    users: Object
 });
 
+const openPosition = () => {
+    position.value = !position.value;
+};
 </script>
 
 <template>
@@ -17,8 +23,11 @@ defineProps({
             </div>
 
             <div>
-                <button
-                    class="bg-header text-white rounded-md px-5 py-2 font-popins text-sm uppercase">postularme</button>
+                <button class="bg-header text-white rounded-md px-5 py-2 font-popins text-sm uppercase"
+                    @click="openPosition()">postularme</button>
+
+                <Candidato :position="position" :openPosition="openPosition" :selectProject="selectProject"
+                    :users="users" />
             </div>
         </div>
 

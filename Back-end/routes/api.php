@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CandidatoController;
 use App\Http\Controllers\JobPostingController;
 use App\Http\Controllers\TimeController;
 use App\Http\Controllers\TypeUserController;
@@ -39,3 +40,5 @@ Route::post('/login', [AuthController::class, 'login']);
 
 // Start routes for Projects
 Route::get('/project', [JobPostingController::class, 'show']);
+// Routes for candidates
+Route::post('/candidates', [CandidatoController::class, 'postularme']);

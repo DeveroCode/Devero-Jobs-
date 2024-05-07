@@ -1,7 +1,9 @@
 import clientApi from "@/lib/axios";
+import { data } from "autoprefixer";
 const token = localStorage.getItem('AUTH_TOKEN');
 
 export default {
+    // => Start routes for the user
     register(data) {
         return clientApi.post('/api/register', data);
     },
@@ -28,8 +30,9 @@ export default {
                 console.log(error);
             });
     },
+    // => End router for the user
 
-    // Start Job Posting
+    // => Start Job Posting
     getTime() {
         return clientApi.get('/api/time');
     },
@@ -53,6 +56,16 @@ export default {
     },
     updateProject(data) {
         return clientApi.post('/api/updateProject', data, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+    },
+    // => End router for jobs
+
+    // => Start router for candidates
+    candidate(data) {
+        return clientApi.post('/api/candidates', data, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

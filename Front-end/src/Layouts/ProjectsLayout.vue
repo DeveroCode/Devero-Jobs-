@@ -9,6 +9,10 @@ const { projects } = jobPosting();
 const UseProjects = ref({});
 const selectProject = ref({});
 
+defineProps({
+    users: Object
+});
+
 const getProjects = () => {
     projects(UseProjects);
 }
@@ -32,7 +36,9 @@ const handleSelectProject = (project) => {
         </div>
 
         <main class="px-5 col-span-1" :class="{ 'block': selectProject.id, 'hidden': !selectProject.id }">
-            <CardFullProject :selectProject="selectProject" />
+            <CardFullProject :selectProject="selectProject" :users="users" />
         </main>
+
+
     </section>
 </template>

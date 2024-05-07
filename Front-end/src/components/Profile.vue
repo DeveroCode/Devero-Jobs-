@@ -23,7 +23,6 @@ const handleSubmit = () => {
         password_confirmation: userData.password_confirmation,
         image: image.value
     }
-    console.log(data);
     updateUser(data, errores)
 };
 </script>
