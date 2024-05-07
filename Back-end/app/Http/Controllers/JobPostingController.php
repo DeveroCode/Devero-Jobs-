@@ -38,4 +38,45 @@ class JobPostingController extends Controller
     {
         return new ProjectsCollection(JobPosting::all());
     }
+
+    public function project($id)
+    {
+        $project = JobPosting::find($id);
+
+        $imagePath = '/projects/' . $project->image;
+        $imageUrl = asset('/storage' . $imagePath);
+        $project->image = $imageUrl;
+
+        return response()->json($project);
+    }
+
+    public function update(RegisterProjectRequest $request)
+    {
+        $id = $request->id;
+        $data = $request->validated();
+        $project = JobPosting::find($id);
+
+        info($project);
+
+        if ($request->hasFile('image')) {
+            if ($request->hasFile('imagen') === $data['image']) {
+                unset($data['image']);
+                $project->update($data);
+
+                return [
+                    'project' => $project,
+                ];
+            }
+
+            $imagen = $request->file('image')->store('public/projects');
+            $name_image = str_replace('public/projects/', '', $imagen);
+            $data['image'] = $name_image;
+        };
+
+        $project->update($data);
+
+        return [
+            'project' => $project,
+        ];
+    }
 }
