@@ -4,9 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CandidatoRequest;
 use App\Models\Candidato;
+use App\Models\User;
+use App\Notifications\NuevoVacante;
+use Illuminate\Support\Facades\Notification;
 
 class CandidatoController extends Controller
 {
+
+    // public $vacante;
+
+    // public function mount(JobPosting $vacante)
+    // {
+    //     $this->vacante = $vacante;
+    // }
+
     public function postularme(CandidatoRequest $request)
     {
         // validar
@@ -18,6 +29,8 @@ class CandidatoController extends Controller
             $data['cv'] = $name_cv;
         }
 
+        // Show the user a success message
+
         // Save CV in DB
         $candidato = Candidato::create([
             'cv' => $data['cv'],
@@ -25,13 +38,19 @@ class CandidatoController extends Controller
             'users_id' => $data['user_id'],
         ]);
 
+        // Send email and Notification
+        $usersToNotify = User::whereHas('type_user', function ($query) {
+            $query->where('name', 'ideamaker');
+        })->get();
+
+        Notification::send($usersToNotify, new NuevoVacante(
+            $candidato->job_postings_id,
+            $candidato->users_id,
+            $candidato->jobPosting->title
+        ));
+
         return [
             'candidato' => $candidato,
         ];
-        //  Create postulation
-
-        // Send email
-
-        // Show the user a success message
     }
 }
