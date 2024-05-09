@@ -42,7 +42,7 @@ class NuevoVacante extends Notification
     {
         return (new MailMessage)
             ->subject('Un nuevo candidato ah aplicado')
-            ->line('Nuevo candidato para tu vante ' . ' ' . $this->job_posting_title)
+            ->line('Nuevo candidato para tu vacante ' . ' ' . $this->job_posting_title)
             ->line('Por favor, tome un tiempo para verificar la postulacion y considerar este candidato que podria encajar en su proyecto')
             ->action('Ver candidato', url('/'));
     }

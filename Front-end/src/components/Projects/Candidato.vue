@@ -27,14 +27,13 @@ const handleSubmitCv = () => {
         'job_posting_id': id.value,
         'user_id': idUser.value
     }
-    // console.log(data);
     createCandidate(data, errores);
+    props.openPosition()
 }
 </script>
 
 <template>
     <div>
-
         <div class="fixed inset-0 bg-black opacity-50 z-50" v-show="props.position"></div>
 
         <Dialog :visible="props.position" close-icon="false" :style="{ width: '25rem' }">

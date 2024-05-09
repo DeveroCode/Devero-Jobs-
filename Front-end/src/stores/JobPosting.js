@@ -64,8 +64,15 @@ export const jobPosting = defineStore('job', () => {
     async function createCandidate(candidate, errores) {
         try {
             const data = await APIServices.candidate(candidate);
+            notification.mostrar = true;
+            notification.texto = 'DeveroJobs';
+            notification.error = false;
+            notification.success = 'Postulacion enviada correctamente';
+            router.push({ name: 'dashboard' });
         } catch (error) {
-            console.log(error);
+            if (error.response) {
+                print(errores, error);
+            }
         }
     }
 

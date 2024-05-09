@@ -1,16 +1,13 @@
 <script setup>
-import { defineProps, ref } from 'vue';
+import { defineProps } from 'vue';
 import Candidato from '@/components/Projects/Candidato.vue';
-const position = ref(false);
 
-defineProps({
+const props = defineProps({
     selectProject: Object,
-    users: Object
+    users: Object,
+    openPosition: Function,
+    position: Boolean
 });
-
-const openPosition = () => {
-    position.value = !position.value;
-};
 </script>
 
 <template>

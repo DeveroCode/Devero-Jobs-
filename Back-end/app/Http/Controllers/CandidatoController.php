@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CandidatoRequest;
 use App\Models\Candidato;
+use App\Models\JobPosting;
 use App\Models\User;
 use App\Notifications\NuevoVacante;
 use Illuminate\Support\Facades\Notification;
@@ -43,10 +44,12 @@ class CandidatoController extends Controller
             $query->where('name', 'ideamaker');
         })->get();
 
+        $title = JobPosting::find($data['job_posting_id'])->name;
+
         Notification::send($usersToNotify, new NuevoVacante(
             $candidato->job_postings_id,
             $candidato->users_id,
-            $candidato->jobPosting->title
+            $title
         ));
 
         return [
