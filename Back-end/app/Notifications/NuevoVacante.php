@@ -32,7 +32,7 @@ class NuevoVacante extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -41,9 +41,10 @@ class NuevoVacante extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->line('The introduction to the notification.')
-            ->action('Notification Action', url('/'))
-            ->line('Thank you for using our application!');
+            ->subject('Un nuevo candidato ah aplicado')
+            ->line('Nuevo candidato para tu vante ' . ' ' . $this->job_posting_title)
+            ->line('Por favor, tome un tiempo para verificar la postulacion y considerar este candidato que podria encajar en su proyecto')
+            ->action('Ver candidato', url('/'));
     }
 
     /**
