@@ -92,26 +92,12 @@ const router = createRouter({
     },
   ]
 })
-
-router.beforeEach(async (to, from, next) => {
-  // Verificar si la ruta requiere autenticación y el token de autenticación está presente
+router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth && !localStorage.getItem('AUTH_TOKEN')) {
-    next({ name: 'login' })
+    next({ name: 'login' });
   } else {
-    // Obtener información del usuario desde el backend
-    try {
-      const userInfo = await getUserInfo()
-      // Verificar si el usuario tiene el id correcto para acceder a la vista de proyectos
-      if (to.name === 'projects' && userInfo.id !== 2) {
-        next({ name: 'dashboard' }) // Redirigir a otra ruta si el usuario no tiene permiso
-      } else {
-        next() // Continuar navegando si el usuario tiene permiso
-      }
-    } catch (error) {
-      console.error('Error al obtener la información del usuario:', error)
-      next() // Continuar navegando si hay un error al obtener la información del usuario
-    }
+    next();
   }
-})
+});
 
 export default router

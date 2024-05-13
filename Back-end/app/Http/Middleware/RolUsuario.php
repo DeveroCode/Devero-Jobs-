@@ -17,7 +17,7 @@ class RolUsuario
     {
 
         info($request);
-        if ($request->user()->type_user_id === 1) {
+        if ($request->user()->type_user_id === 2) {
             return response()->json(['error' => 'No autorizado'], 401);
         }
 

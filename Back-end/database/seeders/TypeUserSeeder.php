@@ -14,10 +14,10 @@ class TypeUserSeeder extends Seeder
     {
         $data = [
             array(
-                'name' => "developer",
+                'name' => "reclutador",
             ),
             array(
-                'name' => "ideamaker",
+                'name' => "postulante",
             ),
         ];
 

@@ -15,7 +15,8 @@ onMounted(async () => {
 <template>
     <div class="relative">
         <!-- Bolita de notificación -->
-        <div class="absolute top-0 right-0 transform translate-x-1/4 -translate-y-1/4 bg-icons w-3 h-3 rounded-full">
+        <div class="absolute top-0 right-0 transform translate-x-1/4 -translate-y-1/4 bg-icons w-3 h-3 rounded-full"
+            v-if="notify.length > 0">
         </div>
 
         <!-- Div principal -->

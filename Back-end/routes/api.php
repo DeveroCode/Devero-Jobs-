@@ -25,7 +25,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     });
     Route::post('/update', [AuthController::class, 'update']);
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::apiResource('/postulantes', CandidatoController::class);
+    // Route::apiResource('/postulantes', CandidatoController::class);
 
     // Router for Reclutadores
     Route::middleware('checkRol')->group(function () {
