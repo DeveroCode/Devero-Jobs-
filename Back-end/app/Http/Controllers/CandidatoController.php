@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CandidatoRequest;
+use App\Http\Resources\CandidatoResource;
 use App\Models\Candidato;
 use App\Models\JobPosting;
 use App\Models\User;
@@ -11,7 +12,10 @@ use Illuminate\Support\Facades\Notification;
 
 class CandidatoController extends Controller
 {
-
+    public function index()
+    {
+        return new CandidatoResource(Candidato::all());
+    }
     public function postularme(CandidatoRequest $request)
     {
         // validar

@@ -25,8 +25,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     });
     Route::post('/update', [AuthController::class, 'update']);
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::apiResource('/postulantes', CandidatoController::class);
 
-// Router for Reclutadores
+    // Router for Reclutadores
     Route::middleware('checkRol')->group(function () {
         Route::post('/updateProject', [JobPostingController::class, 'update']);
         Route::get('/notifications', NotificationController::class);
