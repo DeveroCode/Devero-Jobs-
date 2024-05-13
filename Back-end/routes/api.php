@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CandidatoController;
 use App\Http\Controllers\JobPostingController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\TimeController;
 use App\Http\Controllers\TypeUserController;
 use Illuminate\Http\Request;
@@ -22,14 +23,19 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
         return $user;
     });
-
     Route::post('/update', [AuthController::class, 'update']);
     Route::post('/logout', [AuthController::class, 'logout']);
 
-    // Start routes for Projects
-    Route::post('/project-register', [JobPostingController::class, 'store']);
-    Route::get('/project-edit/{id}', [JobPostingController::class, 'project']);
-    Route::post('/updateProject', [JobPostingController::class, 'update']);
+// Router for Reclutadores
+    Route::middleware('checkRol')->group(function () {
+        Route::post('/updateProject', [JobPostingController::class, 'update']);
+        Route::get('/notifications', NotificationController::class);
+
+        // Start routes for Projects
+        Route::post('/project-register', [JobPostingController::class, 'store']);
+        Route::get('/project-edit/{id}', [JobPostingController::class, 'project']);
+
+    });
 });
 
 // Resources
@@ -40,5 +46,6 @@ Route::post('/login', [AuthController::class, 'login']);
 
 // Start routes for Projects
 Route::get('/project', [JobPostingController::class, 'show']);
+
 // Routes for candidates
 Route::post('/candidates', [CandidatoController::class, 'postularme']);

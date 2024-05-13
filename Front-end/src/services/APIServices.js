@@ -61,8 +61,15 @@ export default {
             }
         });
     },
-    // => End router for jobs
 
+    getNotifications() {
+        return clientApi.get('/api/notifications', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+    },
+    // => End router for jobs
     // => Start router for candidates
     candidate(data) {
         return clientApi.post('/api/candidates', data, {
@@ -72,3 +79,5 @@ export default {
         });
     }
 }
+
+

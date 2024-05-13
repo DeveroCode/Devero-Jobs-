@@ -24,8 +24,6 @@ class AuthController extends Controller
     {
         $user = $request->user();
         $user->currentAccessToken()->delete();
-        // $user->tokens()->delete();
-
         return [
             'user' => null,
         ];

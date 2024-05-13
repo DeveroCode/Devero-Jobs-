@@ -12,13 +12,6 @@ use Illuminate\Support\Facades\Notification;
 class CandidatoController extends Controller
 {
 
-    // public $vacante;
-
-    // public function mount(JobPosting $vacante)
-    // {
-    //     $this->vacante = $vacante;
-    // }
-
     public function postularme(CandidatoRequest $request)
     {
         // validar

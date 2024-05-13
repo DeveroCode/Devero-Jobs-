@@ -43,13 +43,13 @@ defineProps({
                             Dashboard
                         </RouterLink>
 
-                        <RouterLink :to="{ name: 'proyectos' }"
+                        <RouterLink :to="{ name: 'proyectos' }" v-if="users.type_user_id === 2"
                             class="flex px-3 hover:text-back transition-colors duration-300 gap-5 items-center font-popins text-white">
                             <FolderIcon class="w-7" />
                             Proyectos
                         </RouterLink>
 
-                        <RouterLink :to="{ name: 'publicar' }" v-if="users.type_user_id === 1"
+                        <RouterLink :to="{ name: 'publicar' }" v-if="users.type_user_id === 2"
                             class="flex px-3 hover:text-back transition-colors duration-300 gap-5 items-center font-popins text-white">
                             <BriefcaseIcon class="w-7" />
                             Publicar

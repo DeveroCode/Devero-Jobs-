@@ -95,6 +95,19 @@ export const authMethods = defineStore('auth', () => {
         }
     }
 
+    async function notifications() {
+        try {
+            const { data } = await APIServices.getNotifications();
+            console.log(data.id);
+            return data;
+        } catch (error) {
+            notification.mostrar = false;
+            notification.texto = 'Error';
+            notification.error = true;
+            notification.success = 'Revisa tu conexión a internet';
+        }
+    }
+
 
     return {
         userRegister,
@@ -102,6 +115,7 @@ export const authMethods = defineStore('auth', () => {
         updateUser,
         logout,
         getTypeUser,
-        dataUser
+        dataUser,
+        notifications
     }
 });

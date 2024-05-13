@@ -1,6 +1,7 @@
 <script setup>
 import { Bars4Icon } from '@heroicons/vue/24/outline';
 import { defineProps } from 'vue';
+import Notifications from '@/components/Notifications.vue'
 
 const props = defineProps({
     toggleMenu: Function,
@@ -22,14 +23,18 @@ const props = defineProps({
             </button>
         </div>
 
+
         <div className="flex flex-row items-center pr-20">
-            <img :src="users.image" class="w-12" />
+            <div>
+                <Notifications />
+            </div>
+
 
             <div class="pl-2">
-                <p class="text-title font-semibold font-popins">{{ users.username }}</p>
-                <p class="text-title font-light">Developer</p>
-                <!-- <p class="text-title font-light font-popins">{{ users.name }}</p> -->
+                <p class="text-title text-sm font-semibold font-popins">{{ users.username }}</p>
+                <p class="text-title text-xs font-light">{{ users.type_user_id }}</p>
             </div>
+            <img :src="users.image" class="w-12" />
         </div>
     </header>
 </template>

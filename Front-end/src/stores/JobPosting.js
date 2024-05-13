@@ -35,7 +35,9 @@ export const jobPosting = defineStore('job', () => {
             const { data } = await APIServices.getProjects();
             project.value = data.data
         } catch (error) {
-            console.log(error);
+            if (error.response && error.response.status === 401) {
+                router.push({ name: 'dashboard' });; // Reemplaza '/no-autorizado' con la ruta de Vue.js a la que deseas redirigir
+            }
         }
     }
 
