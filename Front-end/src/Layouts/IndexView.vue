@@ -16,7 +16,7 @@ onMounted(async () => {
 
 <template>
     <div class="max-w-full">
-        <Header />
+        <Header :users="users" />
         <RouterView :users="users" />
         <Footer />
     </div>

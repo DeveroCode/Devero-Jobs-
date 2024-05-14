@@ -1,11 +1,15 @@
 <script setup>
 // Imports
-import { ref } from 'vue'
+import { ref, defineProps } from 'vue'
 import { Bars4Icon } from '@heroicons/vue/24/outline'
 import Logo from '/logo.png'
 // Components and Views
 import NavLinks from './NavLinks.vue';
 import NavLinkMobile from './NavLinkMobile.vue';
+
+defineProps({
+    users: Object
+});
 
 const open = ref(false);
 
@@ -29,7 +33,7 @@ const toggleMenu = () => {
         <img :src="Logo" class="w-32 mt-2 md:mt-0 z-10" />
 
         <!-- NavLinks aparece solo en pantallas medianas -->
-        <NavLinks class="hidden md:flex" />
+        <NavLinks class="hidden md:flex" :users="users" />
 
         <!-- Botón Mobile -->
         <button @click="toggleMenu" class="z-10 block md:hidden">
