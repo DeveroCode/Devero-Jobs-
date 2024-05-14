@@ -1,6 +1,6 @@
 <script setup>
 import { defineProps } from 'vue';
-import Candidato from '@/components/Projects/Candidato.vue';
+import Candidato from '@/components/Candidates/Candidato.vue';
 
 const prop = defineProps({
     UseProjects: Array,

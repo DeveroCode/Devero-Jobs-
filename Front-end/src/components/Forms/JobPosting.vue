@@ -21,8 +21,6 @@ const job = reactive({
     'image': props.project ? props.project.image : null,
 });
 
-console.log(job);
-
 const handleSubmit = () => {
     const data = {
         'id': props.project ? props.project.id : '',

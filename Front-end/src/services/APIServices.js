@@ -77,6 +77,14 @@ export default {
                 Authorization: `Bearer ${token}`
             }
         });
+    },
+
+    getCandidates(id) {
+        return clientApi.get(`/api/getCandidates/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
     }
 }
 

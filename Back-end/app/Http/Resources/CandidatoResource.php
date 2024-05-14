@@ -20,13 +20,12 @@ class CandidatoResource extends JsonResource
         $cvUrl = asset('/storage' . $cvPath);
 
         // Return user to postulate the job
-        $user = User::find($this->user_id);
+        $user = User::find($this->users_id);
 
         return [
-            'id' => $this->id,
+            'job_postings_id' => $this->job_postings_id,
+            'users_id' => $user->name . ' ' . $user->apellidos,
             'cv' => $cvUrl,
-            'job_posting_id' => $this->job_posting_id,
-            'user_id' => $user,
         ];
     }
 }

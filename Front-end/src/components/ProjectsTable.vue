@@ -1,10 +1,10 @@
 <script setup>
 import { PencilSquareIcon, EyeIcon, ArchiveBoxXMarkIcon } from '@heroicons/vue/24/outline';
-import { defineProps, ref } from 'vue';
+import { defineProps, ref, emit } from 'vue';
 import { jobPosting } from '@/stores/JobPosting'
 import router from '@/router';
 
-const { getProject } = jobPosting();
+const { getProject, candidates } = jobPosting();
 const dataProject = ref(null);
 
 defineProps({
@@ -19,6 +19,14 @@ const handleGetProject = async (id) => {
     localStorage.setItem('dataProject', JSON.stringify(dataProject.value));
     router.push({ name: 'editar', params: { id: dataProject.value.id } });
 };
+
+
+const handleGetCandidates = async (id) => {
+    const { data } = await candidates(id);
+    dataProject.value = data;
+    emit('candidates', dataProject.value);
+    router.push({ name: 'postulantes', params: { id: id } });
+}
 </script>
 
 <template>
@@ -51,7 +59,7 @@ const handleGetProject = async (id) => {
                         <button @click="handleGetProject(job.id)">
                             <PencilSquareIcon class="w-7 text-title" />
                         </button>
-                        <button>
+                        <button @click="handleGetCandidates(job.id)">
                             <EyeIcon class="w-7 text-title" />
                         </button>
                         <button>

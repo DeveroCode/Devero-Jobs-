@@ -12,9 +12,9 @@ use Illuminate\Support\Facades\Notification;
 
 class CandidatoController extends Controller
 {
-    public function index()
+    public function show($id)
     {
-        return new CandidatoResource(Candidato::all());
+        return CandidatoResource::collection(Candidato::where('job_postings_id', $id)->get());
     }
     public function postularme(CandidatoRequest $request)
     {
@@ -38,7 +38,7 @@ class CandidatoController extends Controller
 
         // Send email and Notification
         $usersToNotify = User::whereHas('type_user', function ($query) {
-            $query->where('name', 'ideamaker');
+            $query->where('name', 'reclutador');
         })->get();
 
         $title = JobPosting::find($data['job_posting_id'])->name;

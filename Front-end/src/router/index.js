@@ -11,6 +11,7 @@ import Profile from '@/components/Profile.vue'
 import JobViewVue from '@/views/JobView.vue'
 import ProjectsLayoutVue from '@/Layouts/ProjectsLayout.vue'
 import EditView from '@/views/Dashboard/EditProjectView.vue'
+import Postulante from '@/components/Candidates/ViewCandidates.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -85,8 +86,10 @@ const router = createRouter({
           props: true
         },
         {
-          path: 'notificacion/:id',
-
+          path: 'postulantes/:id',
+          name: 'postulantes',
+          component: Postulante,
+          props: true
         }
       ]
     },
