@@ -30,7 +30,7 @@ import Categorias from '../components/Categorias.vue'
                 </span>
 
                 <div class="space-x-5 mt-6">
-                    <RouterLink :to="{ name: 'home' }"
+                    <RouterLink :to="{ name: 'login' }"
                         class="bg-title py-3 px-7 rounded-sm text-white font-popins font-bold uppercase">
                         Iniciar
                     </RouterLink>

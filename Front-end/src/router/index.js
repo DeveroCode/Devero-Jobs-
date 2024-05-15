@@ -67,6 +67,7 @@ const router = createRouter({
           path: 'proyectos',
           name: 'proyectos',
           props: true,
+          meta: { requiresRoles: 'reclutador' },
           component: ProjectsView
         },
         {
@@ -83,12 +84,14 @@ const router = createRouter({
           path: 'editar/:id',
           name: 'editar',
           component: EditView,
+          meta: { requiresRoles: 'reclutador' },
           props: true
         },
         {
           path: 'postulantes/:id',
           name: 'postulantes',
           component: Postulante,
+          meta: { requiresRoles: 'reclutador' },
           props: true
         }
       ]
@@ -96,8 +99,11 @@ const router = createRouter({
   ]
 })
 router.beforeEach((to, from, next) => {
+  const userRole = localStorage.getItem('USER_ROL');
   if (to.meta.requiresAuth && !localStorage.getItem('AUTH_TOKEN')) {
     next({ name: 'login' });
+  } else if (to.meta.requiresRoles && userRole != 1) {
+    router.push({ name: 'dashboard' });
   } else {
     next();
   }

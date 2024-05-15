@@ -27,6 +27,7 @@ export const authMethods = defineStore('auth', () => {
     async function userLogin(datas, errores) {
         try {
             const { data } = await APIServices.login(datas);
+            // Save token
             localStorage.setItem('AUTH_TOKEN', data.token);
             router.push({ name: 'dashboard' });
         } catch (error) {
@@ -72,6 +73,8 @@ export const authMethods = defineStore('auth', () => {
             notification.texto = 'DeveroJobs';
             notification.error = false;
             notification.success = 'Sesión cerrada correctamente';
+            // save rol user in local storage
+            localStorage.removeItem('USER_ROL');
             localStorage.removeItem('AUTH_TOKEN');
             router.push({ name: 'login' });
         });
@@ -89,6 +92,8 @@ export const authMethods = defineStore('auth', () => {
     async function dataUser(user) {
         try {
             const { data } = await APIServices.getUser();
+            // save rol user in local storage
+            localStorage.setItem('USER_ROL', data.type_user_id);
             user.value = data
         } catch (error) {
             // console.log('Error al obtener los datos: ', error);
